@@ -14,8 +14,39 @@ namespace Test_NavalAction_Tool
 {
     public partial class Form1 : Form
     {
+        private int i_Craft_Add;
+        private List<Dictionary<string, object>> ItemTemplates;
+        private List<string> List_Info_Types = new List<string>();
+        private List<string> List_Info_IDtoName = new List<string>();
+        private Dictionary<string, SortedDictionary<string, int>> Dict_sorted_by_flag_Name_amount = new Dictionary<string, SortedDictionary<string, int>>();
+        private Storage Storage = new Storage();
+        private List<Storage_LabourHours> List_Storage_LabourHours = new List<Storage_LabourHours>();
+        private List<Storage_Ship_Recipes> List_Storage_Ship_Recipes = new List<Storage_Ship_Recipes>();
+        private SortedDictionary<int, string> SDictionary_Info_IDtoName = new SortedDictionary<int, string>();
+        private SortedDictionary<string, Storage_Resources> SDictionary_Storage_Resource = new SortedDictionary<string, Storage_Resources>();
+        private SortedDictionary<string, Storage_Materials> SDictionary_Storage_Materials = new SortedDictionary<string, Storage_Materials>();
+        private SortedDictionary<string, Storage_LabourHours> SDictionary_Storage_LabourHours = new SortedDictionary<string, Storage_LabourHours>();
+        private SortedDictionary<string, bool> SDictionary_Storage_ShipRecipes = new SortedDictionary<string, bool>();
+        private SortedDictionary<string, RecipeShip> SDictionary_Craft_ShipRecipes = new SortedDictionary<string, RecipeShip>();
+        private SortedDictionary<string, RecipeModule> SDictionary_Craft_ModuleRecipes = new SortedDictionary<string, RecipeModule>();
+
+        private SortedDictionary<string, Recipe> SDictionary_Craft_Recipes = new SortedDictionary<string, Recipe>();
+
+        private SortedDictionary<int, Craft_Order> SDictionary_Craft_Order = new SortedDictionary<int, Craft_Order>();
+
+        private SortedDictionary<string, int> SD_Craft_Name_Amount = new SortedDictionary<string, int>();
+
+        private SortedDictionary<string, Ship> SD_ShipsTempates = new SortedDictionary<string, Ship>();
+
+        private SortedDictionary<string, Craft_Recipe> SD_Craft_Recipes_custom = new SortedDictionary<string, Craft_Recipe>();
+
+        private SortedDictionary<string, Craft_Recipe> SD_Craft_Recipes_custom_sorted = new SortedDictionary<string, Craft_Recipe>();
+
+        private Dictionary<string, List<string>> Dict_Craft_Trim_Extra = new Dictionary<string, List<string>>();
+
         public Form1()
         {
+
             InitializeComponent();
             string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/ItemTemplates_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
             text = text.Remove(text.Length - 1);
@@ -1383,7 +1414,7 @@ namespace Test_NavalAction_Tool
             {
                 Craft_Recipe craft_Recipe2 = new Craft_Recipe();
                 SD_Craft_Recipes_custom_sorted.TryGetValue(current2.Key, out craft_Recipe2);
-                int num3 = (int)Math.Ceiling(current2.Value / craft_Recipe2.CR_Result[0].Amount);
+                int num3 = (int)Math.Ceiling(Convert.ToDecimal(current2.Value / craft_Recipe2.CR_Result[0].Amount));
                 int num4 = craft_Recipe2.CR_Result[0].Amount * num3;
                 num = craft_Recipe2.LaborPrice * num3;
                 int num5 = 0;
@@ -1477,7 +1508,7 @@ namespace Test_NavalAction_Tool
             {
                 Craft_Recipe craft_Recipe4 = new Craft_Recipe();
                 SD_Craft_Recipes_custom_sorted.TryGetValue(current3.Key, out craft_Recipe4);
-                int num13 = (int)Math.Ceiling(current3.Value / craft_Recipe4.CR_Result[0].Amount);
+                int num13 = (int)Math.Ceiling(Convert.ToDecimal(current3.Value / craft_Recipe4.CR_Result[0].Amount));
                 int num14 = craft_Recipe4.CR_Result[0].Amount * num13;
                 num = craft_Recipe4.LaborPrice * num13;
                 int num15 = 0;
@@ -1554,7 +1585,7 @@ namespace Test_NavalAction_Tool
             {
                 Craft_Recipe craft_Recipe6 = new Craft_Recipe();
                 SD_Craft_Recipes_custom_sorted.TryGetValue(current4.Key, out craft_Recipe6);
-                int num21 = (int)Math.Ceiling(current4.Value / craft_Recipe6.CR_Result[0].Amount);
+                int num21 = (int)Math.Ceiling(Convert.ToDecimal(current4.Value / craft_Recipe6.CR_Result[0].Amount));
                 int num22 = craft_Recipe6.CR_Result[0].Amount * num21;
                 num = craft_Recipe6.LaborPrice * num21;
                 int num23 = 0;

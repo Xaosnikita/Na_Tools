@@ -1,52 +1,17 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Windows.Forms;
+
 namespace Test_NavalAction_Tool
 {
-    public class Form1 : Form
-    {
-        private int i_Craft_Add;
-
-        private List<Dictionary<string, object>> ItemTemplates;
-
-        private List<string> List_Info_Types = new List<string>();
-
-        private List<string> List_Info_IDtoName = new List<string>();
-
-        private Dictionary<string, SortedDictionary<string, int>> Dict_sorted_by_flag_Name_amount = new Dictionary<string, SortedDictionary<string, int>>();
-
-        private Storage Storage = new Storage();
-
-        private List<Storage_LabourHours> List_Storage_LabourHours = new List<Storage_LabourHours>();
-
-        private List<Storage_Ship_Recipes> List_Storage_Ship_Recipes = new List<Storage_Ship_Recipes>();
-
-        private SortedDictionary<int, string> SDictionary_Info_IDtoName = new SortedDictionary<int, string>();
-
-        private SortedDictionary<string, Storage_Resources> SDictionary_Storage_Resource = new SortedDictionary<string, Storage_Resources>();
-
-        private SortedDictionary<string, Storage_Materials> SDictionary_Storage_Materials = new SortedDictionary<string, Storage_Materials>();
-
-        private SortedDictionary<string, Storage_LabourHours> SDictionary_Storage_LabourHours = new SortedDictionary<string, Storage_LabourHours>();
-
-        private SortedDictionary<string, bool> SDictionary_Storage_ShipRecipes = new SortedDictionary<string, bool>();
-
-        private SortedDictionary<string, RecipeShip> SDictionary_Craft_ShipRecipes = new SortedDictionary<string, RecipeShip>();
-
-        private SortedDictionary<string, RecipeModule> SDictionary_Craft_ModuleRecipes = new SortedDictionary<string, RecipeModule>();
-
-        private SortedDictionary<string, Recipe> SDictionary_Craft_Recipes = new SortedDictionary<string, Recipe>();
-
-        private SortedDictionary<int, Craft_Order> SDictionary_Craft_Order = new SortedDictionary<int, Craft_Order>();
-
-        private SortedDictionary<string, int> SD_Craft_Name_Amount = new SortedDictionary<string, int>();
-
-        private SortedDictionary<string, Ship> SD_ShipsTempates = new SortedDictionary<string, Ship>();
-
-        private SortedDictionary<string, Craft_Recipe> SD_Craft_Recipes_custom = new SortedDictionary<string, Craft_Recipe>();
-
-        private SortedDictionary<string, Craft_Recipe> SD_Craft_Recipes_custom_sorted = new SortedDictionary<string, Craft_Recipe>();
-
-        private Dictionary<string, List<string>> Dict_Craft_Trim_Extra = new Dictionary<string, List<string>>();
-
+    public partial class Form1 : Form
+    {     
         private IContainer components;
 
         private ComboBox comboBox_Info_Type;
@@ -932,23 +897,11 @@ namespace Test_NavalAction_Tool
             this.label_SpeedCurves_Scale.Size = new Size(67, 13);
             this.label_SpeedCurves_Scale.TabIndex = 7;
             this.label_SpeedCurves_Scale.Text = "Scale to:(kn)";
-            this.numericUpDown_SpeedCurves_MaxKn.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 204);
-            NumericUpDown arg_2C1A_0 = this.numericUpDown_SpeedCurves_MaxKn;
-            int[] expr_2C11 = new int[4];
-            expr_2C11[0] = 4;
-            arg_2C1A_0.Increment = new decimal(expr_2C11);
+            this.numericUpDown_SpeedCurves_MaxKn.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 204);            
             this.numericUpDown_SpeedCurves_MaxKn.Location = new Point(736, 32);
-            NumericUpDown arg_2C4C_0 = this.numericUpDown_SpeedCurves_MaxKn;
-            int[] expr_2C42 = new int[4];
-            expr_2C42[0] = 28;
-            arg_2C4C_0.Maximum = new decimal(expr_2C42);
             this.numericUpDown_SpeedCurves_MaxKn.Name = "numericUpDown_SpeedCurves_MaxKn";
             this.numericUpDown_SpeedCurves_MaxKn.Size = new Size(45, 20);
-            this.numericUpDown_SpeedCurves_MaxKn.TabIndex = 6;
-            NumericUpDown arg_2C97_0 = this.numericUpDown_SpeedCurves_MaxKn;
-            int[] expr_2C8D = new int[4];
-            expr_2C8D[0] = 16;
-            arg_2C97_0.Value = new decimal(expr_2C8D);
+            this.numericUpDown_SpeedCurves_MaxKn.TabIndex = 6; 
             this.numericUpDown_SpeedCurves_MaxKn.ValueChanged += new EventHandler(this.numericUpDown_SpeedCurves_MaxKn_ValueChanged);
             this.label_SpeedCurves_OpShip.AutoSize = true;
             this.label_SpeedCurves_OpShip.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -995,10 +948,6 @@ namespace Test_NavalAction_Tool
             this.openFileDialog_Storage.Filter = "JSON files(*.json)|*.json|All files(*.*)|*.*";
             this.saveFileDialog_Storage.Filter = "JSON files(*.json)|*.json|All files(*.*)|*.*";
             this.numericUpDown1.Location = new Point(298, 175);
-            NumericUpDown arg_300F_0 = this.numericUpDown1;
-            int[] expr_3002 = new int[4];
-            expr_3002[0] = 100000000;
-            arg_300F_0.Maximum = new decimal(expr_3002);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new Size(120, 20);
             this.numericUpDown1.TabIndex = 0;
@@ -1007,7 +956,6 @@ namespace Test_NavalAction_Tool
             this.AutoScroll = true;
             base.ClientSize = new Size(1081, 887);
             base.Controls.Add(this.tabControl_NA_Tool);
-            base.Icon = (Icon)componentResourceManager.GetObject("$this.Icon");
             base.Name = "Form1";
             this.Text = "Nick Mickelson's Toolbox";
             this.tabControl_NA_Tool.ResumeLayout(false);
