@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1
+namespace Test_NavalAction_Tool
 {
     static class Program
     {

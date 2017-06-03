@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WindowsFormsApplication1")]
+[assembly: AssemblyTitle("Test_NavalAction_Tool")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CtrlSoft")]
-[assembly: AssemblyProduct("WindowsFormsApplication1")]
+[assembly: AssemblyProduct("Test_NavalAction_Tool")]
 [assembly: AssemblyCopyright("Copyright © CtrlSoft 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("54355a01-7bf0-49c1-861c-dd73511ed69d")]
+[assembly: Guid("256ad86b-d615-4d3b-9cd1-c00cdb0a0966")]
 
 // Version information for an assembly consists of the following four values:
 //

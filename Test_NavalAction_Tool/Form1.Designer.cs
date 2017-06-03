@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApplication1
+﻿namespace Test_NavalAction_Tool
 {
     partial class Form1
     {
