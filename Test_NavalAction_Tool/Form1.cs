@@ -14,8 +14,9 @@ namespace Test_NavalAction_Tool
 {
     public partial class Form1 : Form
     {
+        #region Переменные
         private int i_Craft_Add;
-        private List<Dictionary<string, object>> ItemTemplates;
+        private List<SortedDictionary<string, object>> ItemTemplates;
         private List<string> List_Info_Types = new List<string>();
         private List<string> List_Info_IDtoName = new List<string>();
         private Dictionary<string, SortedDictionary<string, int>> Dict_sorted_by_flag_Name_amount = new Dictionary<string, SortedDictionary<string, int>>();
@@ -29,20 +30,14 @@ namespace Test_NavalAction_Tool
         private SortedDictionary<string, bool> SDictionary_Storage_ShipRecipes = new SortedDictionary<string, bool>();
         private SortedDictionary<string, RecipeShip> SDictionary_Craft_ShipRecipes = new SortedDictionary<string, RecipeShip>();
         private SortedDictionary<string, RecipeModule> SDictionary_Craft_ModuleRecipes = new SortedDictionary<string, RecipeModule>();
-
         private SortedDictionary<string, Recipe> SDictionary_Craft_Recipes = new SortedDictionary<string, Recipe>();
-
         private SortedDictionary<int, Craft_Order> SDictionary_Craft_Order = new SortedDictionary<int, Craft_Order>();
-
         private SortedDictionary<string, int> SD_Craft_Name_Amount = new SortedDictionary<string, int>();
-
         private SortedDictionary<string, Ship> SD_ShipsTempates = new SortedDictionary<string, Ship>();
-
         private SortedDictionary<string, Craft_Recipe> SD_Craft_Recipes_custom = new SortedDictionary<string, Craft_Recipe>();
-
         private SortedDictionary<string, Craft_Recipe> SD_Craft_Recipes_custom_sorted = new SortedDictionary<string, Craft_Recipe>();
-
         private Dictionary<string, List<string>> Dict_Craft_Trim_Extra = new Dictionary<string, List<string>>();
+        #endregion
 
         public Form1()
         {
@@ -52,9 +47,12 @@ namespace Test_NavalAction_Tool
             text = text.Remove(text.Length - 1);
             text = text.Remove(0, 20);
             File.WriteAllText("Item_Templates.json", text);
-            ItemTemplates = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(text);
+            ItemTemplates = JsonConvert.DeserializeObject<List<SortedDictionary<string, object>>>(text);
+
+
             Storage = func_Storage_population();
-            foreach (Dictionary<string, object> current in ItemTemplates)
+
+            foreach (SortedDictionary<string, object> current in ItemTemplates)
             {
                 if (!List_Info_Types.Contains(current["ItemType"].ToString()))
                 {
@@ -76,9 +74,14 @@ namespace Test_NavalAction_Tool
             textBox_Storage_LH_LabourHours_Price.TextChanged += new EventHandler(textBox_Storage_LH_LabourHours_Price_TextChanged);
             textBox_Storage_LH_Labour_Contracts_Quantity.TextChanged += new EventHandler(textBox_Storage_LH_Labour_Contracts_Quantity_TextChanged);
             textBox_Storage_LH_LabourContracts_Price.TextChanged += new EventHandler(textBox_Storage_LH_LabourContracts_Price_TextChanged);
-            foreach (Dictionary<string, object> current3 in ItemTemplates)
+
+
+            #region вкладка Крафта
+
+            foreach (SortedDictionary<string, object> current3 in ItemTemplates)
             {
-                if (current3["ItemType"].ToString() == "RecipeShip")
+                /*
+                 *                 if (current3["ItemType"].ToString() == "RecipeShip")
                 {
                     RecipeShip value = JsonConvert.DeserializeObject<RecipeShip>(JsonConvert.SerializeObject(current3, Formatting.Indented));
                     SDictionary_Craft_ShipRecipes.Add(current3["Name"].ToString().Remove(current3["Name"].ToString().IndexOf(" Blueprint")), value);
@@ -93,6 +96,8 @@ namespace Test_NavalAction_Tool
                     Recipe value3 = JsonConvert.DeserializeObject<Recipe>(JsonConvert.SerializeObject(current3, Formatting.Indented));
                     SDictionary_Craft_Recipes.Add(current3["Name"].ToString().Remove(current3["Name"].ToString().IndexOf(" Blueprint")), value3);
                 }
+                 */
+
                 if (current3["ItemType"].ToString() == "Ship")
                 {
                     Ship value4 = JsonConvert.DeserializeObject<Ship>(JsonConvert.SerializeObject(current3, Formatting.Indented));
@@ -131,11 +136,21 @@ namespace Test_NavalAction_Tool
                 "Teak Log",
                 "Compass Wood"
             });
-            SpeedCurves_Graphics_Draw();
-            SD_Craft_Recipes_custom = func_SD_Craft_Recipes_custom_Population();
+
+            /*
+             * SD_Craft_Recipes_custom = func_SD_Craft_Recipes_custom_Population();
             JsonConvert.SerializeObject(SD_Craft_Recipes_custom, Formatting.Indented);
             SD_Craft_Recipes_custom_sorted = func_SD_Craft_Recipes_custom_FlagSort(SD_Craft_Recipes_custom);
             JsonConvert.SerializeObject(SD_Craft_Recipes_custom_sorted, Formatting.Indented);
+             */
+
+
+            #endregion
+
+            SpeedCurves_Graphics_Draw();
+
+
+
         }
 
         private void textBox__Storage_Resource_Quantity_TextChanged(object sender, EventArgs e)
@@ -213,7 +228,7 @@ namespace Test_NavalAction_Tool
             Storage storage = new Storage();
             int num = 0;
             int num2 = 0;
-            foreach (Dictionary<string, object> current in ItemTemplates)
+            foreach (SortedDictionary<string, object> current in ItemTemplates)
             {
                 if (current["ItemType"].ToString() == "Resource")
                 {
@@ -252,7 +267,7 @@ namespace Test_NavalAction_Tool
             storage_LabourHours.Quantity = Convert.ToInt32(textBox_Storage_LH_Labour_Hours_Quantity.Text);
             SDictionary_Storage_LabourHours.Add("Labour Hours", storage_LabourHours);
             List_Storage_LabourHours.Add(storage_LabourHours);
-            foreach (Dictionary<string, object> current2 in ItemTemplates)
+            foreach (SortedDictionary<string, object> current2 in ItemTemplates)
             {
                 if (current2["ItemType"].ToString() == "ExtraLaborHoursUsableItem")
                 {
@@ -503,7 +518,7 @@ namespace Test_NavalAction_Tool
             listBox_Info_Name.Enabled = true;
             comboBox_Info_Type.SelectedItem.ToString();
             listBox_Info_Name.Items.Clear();
-            foreach (Dictionary<string, object> current in ItemTemplates)
+            foreach (SortedDictionary<string, object> current in ItemTemplates)
             {
                 if (current["ItemType"].ToString() == comboBox_Info_Type.SelectedItem.ToString() && !listBox_Info_Name.Items.Contains(current["Name"].ToString()))
                 {
@@ -515,13 +530,13 @@ namespace Test_NavalAction_Tool
         private void listBox_Name_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBox_Info_Object.ResetText();
-            foreach (Dictionary<string, object> current in ItemTemplates)
+            foreach (SortedDictionary<string, object> obj in ItemTemplates)
             {
-                if (current["ItemType"].ToString() == comboBox_Info_Type.SelectedItem.ToString() && current["Name"].ToString() == listBox_Info_Name.SelectedItem.ToString())
+                if (obj["ItemType"].ToString() == comboBox_Info_Type.SelectedItem.ToString() && obj["Name"].ToString() == listBox_Info_Name.SelectedItem.ToString())
                 {
-                    foreach (string current2 in current.Keys)
+                    foreach (string key in obj.Keys)
                     {
-                        string text = current[current2].ToString();
+                        string text = obj[key].ToString();
                         if (text.Contains("\"Template\": "))
                         {
                             do
@@ -544,7 +559,7 @@ namespace Test_NavalAction_Tool
                         textBox_Info_Object.Text = string.Concat(new string[]
                         {
                             textBox_Info_Object.Text,
-                            current2,
+                            key,
                             " : ",
                             text,
                             "\r\n"
