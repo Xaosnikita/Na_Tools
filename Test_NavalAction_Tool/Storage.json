@@ -1,0 +1,734 @@
+{
+  "Storage_Resources": [
+    {
+      "Name": "American Cotton",
+      "Quantity": 0,
+      "Price": 30,
+      "BasePrice": 30,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 31,
+      "ProducedByNation": 8
+    },
+    {
+      "Name": "Batavian Spices",
+      "Quantity": 0,
+      "Price": 200,
+      "BasePrice": 200,
+      "ItemWeight": 0.2,
+      "AutoFillPrice": 3,
+      "Id": 32,
+      "ProducedByNation": 5
+    },
+    {
+      "Name": "Coal",
+      "Quantity": 0,
+      "Price": 23,
+      "BasePrice": 23,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 24,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Compass Wood",
+      "Quantity": 0,
+      "Price": 1000,
+      "BasePrice": 1000,
+      "ItemWeight": 2.5,
+      "AutoFillPrice": 3,
+      "Id": 25,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Copper Ore",
+      "Quantity": 0,
+      "Price": 42,
+      "BasePrice": 42,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 364,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Danish Beer",
+      "Quantity": 0,
+      "Price": 90,
+      "BasePrice": 90,
+      "ItemWeight": 0.5,
+      "AutoFillPrice": 3,
+      "Id": 33,
+      "ProducedByNation": 6
+    },
+    {
+      "Name": "Fir Log",
+      "Quantity": 0,
+      "Price": 30,
+      "BasePrice": 30,
+      "ItemWeight": 2.5,
+      "AutoFillPrice": 3,
+      "Id": 26,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Fish Meat",
+      "Quantity": 0,
+      "Price": 67,
+      "BasePrice": 67,
+      "ItemWeight": 0.5,
+      "AutoFillPrice": 3,
+      "Id": 620,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Food Supplies",
+      "Quantity": 0,
+      "Price": 250,
+      "BasePrice": 250,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 558,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "French Wine",
+      "Quantity": 0,
+      "Price": 100,
+      "BasePrice": 100,
+      "ItemWeight": 0.5,
+      "AutoFillPrice": 3,
+      "Id": 34,
+      "ProducedByNation": 3
+    },
+    {
+      "Name": "Gold",
+      "Quantity": 0,
+      "Price": 152,
+      "BasePrice": 152,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 27,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Hemp",
+      "Quantity": 0,
+      "Price": 100,
+      "BasePrice": 100,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 28,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Historical Artifact",
+      "Quantity": 0,
+      "Price": 1000,
+      "BasePrice": 1000,
+      "ItemWeight": 0.2,
+      "AutoFillPrice": 3,
+      "Id": 38,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Iberian Meat",
+      "Quantity": 0,
+      "Price": 90,
+      "BasePrice": 90,
+      "ItemWeight": 0.5,
+      "AutoFillPrice": 3,
+      "Id": 35,
+      "ProducedByNation": 2
+    },
+    {
+      "Name": "Indian Tea",
+      "Quantity": 0,
+      "Price": 100,
+      "BasePrice": 100,
+      "ItemWeight": 0.5,
+      "AutoFillPrice": 3,
+      "Id": 36,
+      "ProducedByNation": 4
+    },
+    {
+      "Name": "Iron Ore",
+      "Quantity": 0,
+      "Price": 149,
+      "BasePrice": 149,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 29,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Lignum Vitae Log",
+      "Quantity": 0,
+      "Price": 250,
+      "BasePrice": 250,
+      "ItemWeight": 2.5,
+      "AutoFillPrice": 3,
+      "Id": 30,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Live Oak Log",
+      "Quantity": 0,
+      "Price": 100,
+      "BasePrice": 100,
+      "ItemWeight": 4.0,
+      "AutoFillPrice": 3,
+      "Id": 300,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Marine Recruit Order",
+      "Quantity": 0,
+      "Price": 250,
+      "BasePrice": 250,
+      "ItemWeight": 0.0,
+      "AutoFillPrice": 3,
+      "Id": 421,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Oak Log",
+      "Quantity": 0,
+      "Price": 50,
+      "BasePrice": 50,
+      "ItemWeight": 2.5,
+      "AutoFillPrice": 3,
+      "Id": 39,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Pine Log",
+      "Quantity": 0,
+      "Price": 30,
+      "BasePrice": 30,
+      "ItemWeight": 2.5,
+      "AutoFillPrice": 3,
+      "Id": 40,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Red Wood Log",
+      "Quantity": 0,
+      "Price": 50,
+      "BasePrice": 50,
+      "ItemWeight": 2.5,
+      "AutoFillPrice": 3,
+      "Id": 41,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Rum",
+      "Quantity": 0,
+      "Price": 105,
+      "BasePrice": 105,
+      "ItemWeight": 0.5,
+      "AutoFillPrice": 3,
+      "Id": 365,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Salt",
+      "Quantity": 0,
+      "Price": 50,
+      "BasePrice": 50,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 621,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Shipboy Recruit Order",
+      "Quantity": 0,
+      "Price": 1000,
+      "BasePrice": 1000,
+      "ItemWeight": 0.0,
+      "AutoFillPrice": 3,
+      "Id": 422,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Silver",
+      "Quantity": 0,
+      "Price": 75,
+      "BasePrice": 75,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 42,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Stone Block",
+      "Quantity": 0,
+      "Price": 10,
+      "BasePrice": 10,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 43,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Sugar",
+      "Quantity": 0,
+      "Price": 400,
+      "BasePrice": 400,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 606,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Swedish Iron",
+      "Quantity": 0,
+      "Price": 150,
+      "BasePrice": 150,
+      "ItemWeight": 1.0,
+      "AutoFillPrice": 3,
+      "Id": 37,
+      "ProducedByNation": 7
+    },
+    {
+      "Name": "Teak Log",
+      "Quantity": 0,
+      "Price": 45,
+      "BasePrice": 45,
+      "ItemWeight": 2.5,
+      "AutoFillPrice": 3,
+      "Id": 44,
+      "ProducedByNation": -1
+    },
+    {
+      "Name": "Tobacco",
+      "Quantity": 0,
+      "Price": 500,
+      "BasePrice": 500,
+      "ItemWeight": 0.5,
+      "AutoFillPrice": 3,
+      "Id": 607,
+      "ProducedByNation": -1
+    }
+  ],
+  "Storage_Materials": [
+    {
+      "Name": "Ballast",
+      "Quantity": 0,
+      "Price": 15,
+      "BasePrice": 15,
+      "ItemWeight": 1.5,
+      "Id": 2
+    },
+    {
+      "Name": "Barrels",
+      "Quantity": 0,
+      "Price": 252,
+      "BasePrice": 252,
+      "ItemWeight": 3.42,
+      "Id": 360
+    },
+    {
+      "Name": "Blocks",
+      "Quantity": 0,
+      "Price": 5,
+      "BasePrice": 5,
+      "ItemWeight": 0.05,
+      "Id": 19
+    },
+    {
+      "Name": "Cables And Howsers",
+      "Quantity": 0,
+      "Price": 118,
+      "BasePrice": 118,
+      "ItemWeight": 0.92,
+      "Id": 3
+    },
+    {
+      "Name": "Canvas Rolls",
+      "Quantity": 0,
+      "Price": 100,
+      "BasePrice": 100,
+      "ItemWeight": 1.0,
+      "Id": 20
+    },
+    {
+      "Name": "Cases",
+      "Quantity": 0,
+      "Price": 322,
+      "BasePrice": 322,
+      "ItemWeight": 4.17,
+      "Id": 361
+    },
+    {
+      "Name": "Copper Coins",
+      "Quantity": 0,
+      "Price": 153,
+      "BasePrice": 153,
+      "ItemWeight": 0.67,
+      "Id": 426
+    },
+    {
+      "Name": "Copper Ingots",
+      "Quantity": 0,
+      "Price": 130,
+      "BasePrice": 130,
+      "ItemWeight": 0.67,
+      "Id": 362
+    },
+    {
+      "Name": "Cordage And Oakum",
+      "Quantity": 0,
+      "Price": 82,
+      "BasePrice": 82,
+      "ItemWeight": 0.81,
+      "Id": 21
+    },
+    {
+      "Name": "Fir Frame Parts",
+      "Quantity": 0,
+      "Price": 18,
+      "BasePrice": 18,
+      "ItemWeight": 1.5,
+      "Id": 297
+    },
+    {
+      "Name": "Furnishings",
+      "Quantity": 0,
+      "Price": 796,
+      "BasePrice": 796,
+      "ItemWeight": 13.84,
+      "Id": 4
+    },
+    {
+      "Name": "Gold Coins",
+      "Quantity": 0,
+      "Price": 373,
+      "BasePrice": 373,
+      "ItemWeight": 0.67,
+      "Id": 390
+    },
+    {
+      "Name": "Gold Ingots",
+      "Quantity": 0,
+      "Price": 350,
+      "BasePrice": 350,
+      "ItemWeight": 0.67,
+      "Id": 6
+    },
+    {
+      "Name": "High Grade Note",
+      "Quantity": 0,
+      "Price": 11190,
+      "BasePrice": 11190,
+      "ItemWeight": 0.0,
+      "Id": 296
+    },
+    {
+      "Name": "Iron Fittings",
+      "Quantity": 0,
+      "Price": 258,
+      "BasePrice": 258,
+      "ItemWeight": 1.01,
+      "Id": 5
+    },
+    {
+      "Name": "Iron Ingots",
+      "Quantity": 0,
+      "Price": 172,
+      "BasePrice": 172,
+      "ItemWeight": 0.67,
+      "Id": 18
+    },
+    {
+      "Name": "Knees",
+      "Quantity": 0,
+      "Price": 500,
+      "BasePrice": 500,
+      "ItemWeight": 1.25,
+      "Id": 11
+    },
+    {
+      "Name": "Large Carriage",
+      "Quantity": 0,
+      "Price": 2546,
+      "BasePrice": 2546,
+      "ItemWeight": 9.56,
+      "Id": 415
+    },
+    {
+      "Name": "Live Oak Frame Parts",
+      "Quantity": 0,
+      "Price": 60,
+      "BasePrice": 60,
+      "ItemWeight": 2.4,
+      "Id": 298
+    },
+    {
+      "Name": "Low Grade Note",
+      "Quantity": 0,
+      "Price": 4590,
+      "BasePrice": 4590,
+      "ItemWeight": 0.0,
+      "Id": 427
+    },
+    {
+      "Name": "Medium Carriage",
+      "Quantity": 0,
+      "Price": 872,
+      "BasePrice": 872,
+      "ItemWeight": 4.26,
+      "Id": 416
+    },
+    {
+      "Name": "Mid Grade Note",
+      "Quantity": 0,
+      "Price": 6570,
+      "BasePrice": 6570,
+      "ItemWeight": 0.0,
+      "Id": 429
+    },
+    {
+      "Name": "Oak Frame Parts",
+      "Quantity": 0,
+      "Price": 30,
+      "BasePrice": 30,
+      "ItemWeight": 1.5,
+      "Id": 8
+    },
+    {
+      "Name": "Planks",
+      "Quantity": 0,
+      "Price": 10,
+      "BasePrice": 10,
+      "ItemWeight": 0.5,
+      "Id": 14
+    },
+    {
+      "Name": "Precise Parts",
+      "Quantity": 0,
+      "Price": 996,
+      "BasePrice": 996,
+      "ItemWeight": 4.02,
+      "Id": 363
+    },
+    {
+      "Name": "Rigging Parts",
+      "Quantity": 0,
+      "Price": 15,
+      "BasePrice": 15,
+      "ItemWeight": 1.25,
+      "Id": 22
+    },
+    {
+      "Name": "Rudder Parts",
+      "Quantity": 0,
+      "Price": 74,
+      "BasePrice": 74,
+      "ItemWeight": 1.06,
+      "Id": 15
+    },
+    {
+      "Name": "Silver Coins",
+      "Quantity": 0,
+      "Price": 219,
+      "BasePrice": 219,
+      "ItemWeight": 0.67,
+      "Id": 428
+    },
+    {
+      "Name": "Silver Ingots",
+      "Quantity": 0,
+      "Price": 196,
+      "BasePrice": 196,
+      "ItemWeight": 0.67,
+      "Id": 23
+    },
+    {
+      "Name": "Small Carriage",
+      "Quantity": 0,
+      "Price": 353,
+      "BasePrice": 353,
+      "ItemWeight": 1.84,
+      "Id": 417
+    },
+    {
+      "Name": "Tar",
+      "Quantity": 0,
+      "Price": 30,
+      "BasePrice": 30,
+      "ItemWeight": 0.25,
+      "Id": 16
+    },
+    {
+      "Name": "Teak Frame Parts",
+      "Quantity": 0,
+      "Price": 27,
+      "BasePrice": 27,
+      "ItemWeight": 1.5,
+      "Id": 299
+    },
+    {
+      "Name": "Wooden Fittings",
+      "Quantity": 0,
+      "Price": 15,
+      "BasePrice": 15,
+      "ItemWeight": 1.25,
+      "Id": 1
+    }
+  ],
+  "Storage_LabourHours": [
+    {
+      "Name": "Labour Hours:",
+      "Quantity": 0,
+      "Price": 250
+    },
+    {
+      "Name": "Labor Contracts",
+      "Quantity": 0,
+      "Price": 125000
+    }
+  ],
+  "Storage_Ship_Recipes": [
+    {
+      "Name": "3rd Rate Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "BellePoule Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Bellona Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Brig Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Bucentaure Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Cerberus Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Constitution Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Cutter Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Essex Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Frigate Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Indiaman Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Ingermanland Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Le Gros Ventre Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Lynx Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Mercury Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Mortar Brig Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "NavyBrig Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Niagara Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Pickle Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Pirate Frigate Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Privateer Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Rattlesnake Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Rattlesnake Heavy Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Renommee Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Santa Cecilia Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Santisima Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Snow Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "St. Pavel Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Surprise Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Traders Brig Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Traders Cutter Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Traders Lynx Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Traders Snow Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Trincomalee Blueprint",
+      "Checked": true
+    },
+    {
+      "Name": "Victory Blueprint",
+      "Checked": true
+    }
+  ]
+}

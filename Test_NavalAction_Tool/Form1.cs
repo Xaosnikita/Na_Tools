@@ -43,10 +43,15 @@ namespace Test_NavalAction_Tool
         {
 
             InitializeComponent();
-            string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/ItemTemplates_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
+
+            string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/ItemTemplates_cleanopenworldprodus1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
+
             text = text.Remove(text.Length - 1);
             text = text.Remove(0, 20);
-            File.WriteAllText("Item_Templates.json", text);
+            string file_path = "/Item_Templates.json";
+
+            File.WriteAllText(file_path, text);
+
             ItemTemplates = JsonConvert.DeserializeObject<List<SortedDictionary<string, object>>>(text);
 
 
