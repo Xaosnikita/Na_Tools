@@ -44,18 +44,7 @@ namespace Test_NavalAction_Tool
 
             InitializeComponent();
 
-            string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/ItemTemplates_cleanopenworldprodus1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
-
-            text = text.Remove(text.Length - 1);
-            text = text.Remove(0, 20);
-            string file_path = "/Item_Templates.json";
-
-            File.WriteAllText(file_path, text);
-
-            ItemTemplates = JsonConvert.DeserializeObject<List<SortedDictionary<string, object>>>(text);
-
-
-            Storage = func_Storage_population();
+            json_ItemTemplates_deserialise();
 
             foreach (SortedDictionary<string, object> current in ItemTemplates)
             {
@@ -69,6 +58,10 @@ namespace Test_NavalAction_Tool
             {
                 List_Info_IDtoName.Add(current2.Key.ToString() + "        " + current2.Value);
             }
+
+            Storage = func_Storage_population();
+
+
             List_Info_Types.Sort();
             comboBox_Info_Type.DataSource = List_Info_Types;
             listBox_Info_IDtoName.DataSource = List_Info_IDtoName;
@@ -156,6 +149,19 @@ namespace Test_NavalAction_Tool
 
 
 
+        }
+
+        public void json_ItemTemplates_deserialise()
+        {
+            string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/ItemTemplates_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
+
+            text = text.Remove(text.Length - 1);
+            text = text.Remove(0, 20);
+            string file_path = "Item_Templates.json";
+
+            File.WriteAllText(file_path, text);
+
+            ItemTemplates = JsonConvert.DeserializeObject<List<SortedDictionary<string, object>>>(text);
         }
 
         private void textBox__Storage_Resource_Quantity_TextChanged(object sender, EventArgs e)
@@ -549,7 +555,7 @@ namespace Test_NavalAction_Tool
                                 string arg_B9_0 = text;
                                 string text2 = "\"Template\": ";
                                 int num = arg_B9_0.IndexOf(text2);
-                                string text3 = arg_B9_0.Substring(num + text2.Count<char>(), 3);
+                                string text3 = arg_B9_0.Substring(num + text2.Count<char>(), 6);
                                 num.ToString();
                                 if (text3.Contains(","))
                                 {
