@@ -50,7 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Item_Templates_Classes.cs" />
+    <Compile Include="Class_Nations.cs" />
+    <Compile Include="Class_Ports.cs" />
+    <Compile Include="Classes_Item_Templates.cs" />
+    <Compile Include="Class_Shops.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

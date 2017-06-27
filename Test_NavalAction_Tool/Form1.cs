@@ -17,6 +17,10 @@ namespace Test_NavalAction_Tool
         #region Переменные
         private int i_Craft_Add;
         private List<SortedDictionary<string, object>> ItemTemplates;
+        private List<Port> List_Ports = new List<Port>();
+        private List<Shop> List_Shops = new List<Shop>();
+        private List<Nations> List_Nations = new List<Nations>();
+        private Nations Nations;
         private List<string> List_Info_Types = new List<string>();
         private List<string> List_Info_IDtoName = new List<string>();
         private Dictionary<string, SortedDictionary<string, int>> Dict_sorted_by_flag_Name_amount = new Dictionary<string, SortedDictionary<string, int>>();
@@ -44,7 +48,10 @@ namespace Test_NavalAction_Tool
 
             InitializeComponent();
 
-            json_ItemTemplates_deserialise();
+            func_json_ItemTemplates_deserialise();
+            func_json_Ports_deserialise();
+            func_json_Shops_deserialise();
+            func_json_Nations_deserialise();
 
             foreach (SortedDictionary<string, object> current in ItemTemplates)
             {
@@ -151,17 +158,61 @@ namespace Test_NavalAction_Tool
 
         }
 
-        public void json_ItemTemplates_deserialise()
+        public void func_json_ItemTemplates_deserialise()
         {
             string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/ItemTemplates_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
 
             text = text.Remove(text.Length - 1);
-            text = text.Remove(0, 20);
+            string text_remove = "var ItemTemplates = ";
+            text = text.Remove(0, text_remove.Length);
             string file_path = "Item_Templates.json";
 
             File.WriteAllText(file_path, text);
 
             ItemTemplates = JsonConvert.DeserializeObject<List<SortedDictionary<string, object>>>(text);
+        }
+
+        public void func_json_Ports_deserialise()
+        {
+            string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/Ports_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
+
+            text = text.Remove(text.Length - 1);
+            string text_remove = "var Ports = ";
+            text = text.Remove(0, text_remove.Length);
+            string file_path = "Ports.json";
+
+            File.WriteAllText(file_path, text);
+
+            List_Ports = JsonConvert.DeserializeObject<List<Port>>(text);
+        }
+
+        public void func_json_Shops_deserialise()
+        {
+            string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/Shops_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
+
+            text = text.Remove(text.Length - 1);
+            string text_remove = "var Shops = ";
+            text = text.Remove(0, text_remove.Length);
+            string file_path = "Shops.json";
+
+            File.WriteAllText(file_path, text);
+
+            List_Shops = JsonConvert.DeserializeObject<List<Shop>>(text);
+        }
+
+        public void func_json_Nations_deserialise()
+        {
+            string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/Nations_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
+
+            text = text.Remove(text.Length - 1);
+            string text_remove = "var Nations = ";
+            text = text.Remove(0, text_remove.Length);
+            string file_path = "Nations.json";
+
+            File.WriteAllText(file_path, text);
+
+            Nations = JsonConvert.DeserializeObject<Nations>(text);
+            //List_Nations = JsonConvert.DeserializeObject<List<Nations>>(text);
         }
 
         private void textBox__Storage_Resource_Quantity_TextChanged(object sender, EventArgs e)
