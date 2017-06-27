@@ -281,6 +281,7 @@ namespace Test_NavalAction_Tool
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.openFileDialog_Storage = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog_Storage = new System.Windows.Forms.SaveFileDialog();
+            this.pictureBox_Map = new System.Windows.Forms.PictureBox();
             this.tabControl_NA_Tool.SuspendLayout();
             this.tabPage_Info.SuspendLayout();
             this.tabPage_Storage.SuspendLayout();
@@ -298,6 +299,7 @@ namespace Test_NavalAction_Tool
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_SpeedCurves_Base)).BeginInit();
             this.tabPage_Test.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Map)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox_Info_Type
@@ -1202,7 +1204,10 @@ namespace Test_NavalAction_Tool
             // 
             // tabPage_Test
             // 
+            this.tabPage_Test.AllowDrop = true;
+            this.tabPage_Test.Controls.Add(this.pictureBox_Map);
             this.tabPage_Test.Controls.Add(this.numericUpDown1);
+            this.tabPage_Test.ImeMode = System.Windows.Forms.ImeMode.Hiragana;
             this.tabPage_Test.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Test.Name = "tabPage_Test";
             this.tabPage_Test.Size = new System.Drawing.Size(1049, 837);
@@ -1212,7 +1217,7 @@ namespace Test_NavalAction_Tool
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(298, 175);
+            this.numericUpDown1.Location = new System.Drawing.Point(846, 40);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 0;
@@ -1225,6 +1230,16 @@ namespace Test_NavalAction_Tool
             // saveFileDialog_Storage
             // 
             this.saveFileDialog_Storage.Filter = "JSON files(*.json)|*.json|All files(*.*)|*.*";
+            // 
+            // pictureBox_Map
+            // 
+            this.pictureBox_Map.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox_Map.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Map.Image")));
+            this.pictureBox_Map.Location = new System.Drawing.Point(5, 3);
+            this.pictureBox_Map.Name = "pictureBox_Map";
+            this.pictureBox_Map.Size = new System.Drawing.Size(520, 362);
+            this.pictureBox_Map.TabIndex = 1;
+            this.pictureBox_Map.TabStop = false;
             // 
             // Form1
             // 
@@ -1263,8 +1278,11 @@ namespace Test_NavalAction_Tool
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_SpeedCurves_Base)).EndInit();
             this.tabPage_Test.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Map)).EndInit();
             this.ResumeLayout(false);
 
         }
+
+        private PictureBox pictureBox_Map;
     }
 }

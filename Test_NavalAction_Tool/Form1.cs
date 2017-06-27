@@ -19,7 +19,6 @@ namespace Test_NavalAction_Tool
         private List<SortedDictionary<string, object>> ItemTemplates;
         private List<Port> List_Ports = new List<Port>();
         private List<Shop> List_Shops = new List<Shop>();
-        private List<Nations> List_Nations = new List<Nations>();
         private Nations Nations;
         private List<string> List_Info_Types = new List<string>();
         private List<string> List_Info_IDtoName = new List<string>();
@@ -212,7 +211,6 @@ namespace Test_NavalAction_Tool
             File.WriteAllText(file_path, text);
 
             Nations = JsonConvert.DeserializeObject<Nations>(text);
-            //List_Nations = JsonConvert.DeserializeObject<List<Nations>>(text);
         }
 
         private void textBox__Storage_Resource_Quantity_TextChanged(object sender, EventArgs e)
