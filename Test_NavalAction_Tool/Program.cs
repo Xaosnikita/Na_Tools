@@ -16,7 +16,7 @@ namespace Test_NavalAction_Tool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form_NickMickelsonsToolbox());
         }
     }
 }
