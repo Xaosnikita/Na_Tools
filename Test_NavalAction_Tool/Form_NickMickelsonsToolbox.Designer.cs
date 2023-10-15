@@ -276,8 +276,8 @@ namespace Test_NavalAction_Tool
             this.comboBox_SpeedCurves_YrShip = new System.Windows.Forms.ComboBox();
             this.pictureBox_SpeedCurves_Base = new System.Windows.Forms.PictureBox();
             this.tabPage_Test = new System.Windows.Forms.TabPage();
-            this.panel_PBActiveMap = new System.Windows.Forms.Panel();
             this.pictureBox_ActiveMap = new System.Windows.Forms.PictureBox();
+            this.panel_PBActiveMap = new System.Windows.Forms.Panel();
             this.openFileDialog_Storage = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog_Storage = new System.Windows.Forms.SaveFileDialog();
             this.tabControl_NA_Tool.SuspendLayout();
@@ -296,7 +296,6 @@ namespace Test_NavalAction_Tool
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_SpeedCurves_MaxKn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_SpeedCurves_Base)).BeginInit();
             this.tabPage_Test.SuspendLayout();
-            this.panel_PBActiveMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ActiveMap)).BeginInit();
             this.SuspendLayout();
             // 
@@ -1204,6 +1203,7 @@ namespace Test_NavalAction_Tool
             // 
             this.tabPage_Test.AllowDrop = true;
             this.tabPage_Test.AutoScroll = true;
+            this.tabPage_Test.Controls.Add(this.pictureBox_ActiveMap);
             this.tabPage_Test.Controls.Add(this.panel_PBActiveMap);
             this.tabPage_Test.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.tabPage_Test.Location = new System.Drawing.Point(4, 22);
@@ -1213,20 +1213,11 @@ namespace Test_NavalAction_Tool
             this.tabPage_Test.Text = "Test";
             this.tabPage_Test.UseVisualStyleBackColor = true;
             // 
-            // panel_PBActiveMap
-            // 
-            this.panel_PBActiveMap.AutoScroll = true;
-            this.panel_PBActiveMap.Controls.Add(this.pictureBox_ActiveMap);
-            this.panel_PBActiveMap.Location = new System.Drawing.Point(483, 3);
-            this.panel_PBActiveMap.Name = "panel_PBActiveMap";
-            this.panel_PBActiveMap.Size = new System.Drawing.Size(563, 399);
-            this.panel_PBActiveMap.TabIndex = 2;
-            // 
             // pictureBox_ActiveMap
             // 
             this.pictureBox_ActiveMap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox_ActiveMap.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_ActiveMap.Image")));
-            this.pictureBox_ActiveMap.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox_ActiveMap.Location = new System.Drawing.Point(119, 7);
             this.pictureBox_ActiveMap.Name = "pictureBox_ActiveMap";
             this.pictureBox_ActiveMap.Size = new System.Drawing.Size(560, 392);
             this.pictureBox_ActiveMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1237,6 +1228,14 @@ namespace Test_NavalAction_Tool
             this.pictureBox_ActiveMap.MouseLeave += new System.EventHandler(this.pictureBox_ActiveMap_MouseLeave);
             this.pictureBox_ActiveMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_ActiveMap_MouseMove);
             this.pictureBox_ActiveMap.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_ActiveMap_MouseUp);
+            // 
+            // panel_PBActiveMap
+            // 
+            this.panel_PBActiveMap.AutoScroll = true;
+            this.panel_PBActiveMap.Location = new System.Drawing.Point(483, 3);
+            this.panel_PBActiveMap.Name = "panel_PBActiveMap";
+            this.panel_PBActiveMap.Size = new System.Drawing.Size(563, 399);
+            this.panel_PBActiveMap.TabIndex = 2;
             // 
             // openFileDialog_Storage
             // 
@@ -1284,7 +1283,6 @@ namespace Test_NavalAction_Tool
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_SpeedCurves_MaxKn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_SpeedCurves_Base)).EndInit();
             this.tabPage_Test.ResumeLayout(false);
-            this.panel_PBActiveMap.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ActiveMap)).EndInit();
             this.ResumeLayout(false);
 

@@ -14,7 +14,7 @@ namespace Test_NavalAction_Tool
 {
     public partial class Form_NickMickelsonsToolbox : Form
     {
-        #region Переменные
+        #region Definition
         private int i_Craft_Add;
         private List<SortedDictionary<string, object>> ItemTemplates;
         private List<Port> List_Ports = new List<Port>();
@@ -41,13 +41,11 @@ namespace Test_NavalAction_Tool
         private SortedDictionary<string, Craft_Recipe> SD_Craft_Recipes_custom_sorted = new SortedDictionary<string, Craft_Recipe>();
         private Dictionary<string, List<string>> Dict_Craft_Trim_Extra = new Dictionary<string, List<string>>();
 
-        #region 
         private bool mouseInPanel;
         private bool _pMove;
 
         private Int32 _tmpX;
         private Int32 _tmpY;
-        #endregion
 
         #endregion
 
@@ -61,14 +59,9 @@ namespace Test_NavalAction_Tool
             func_json_Shops_deserialise();
             func_json_Nations_deserialise();
 
-
             panel_PBActiveMap.Controls.Add(pictureBox_ActiveMap);
             Controls.Add(panel_PBActiveMap);
             MouseWheel += OnMouseWheel;
-
-
-
-
 
             foreach (SortedDictionary<string, object> current in ItemTemplates)
             {
@@ -85,7 +78,6 @@ namespace Test_NavalAction_Tool
 
             Storage = func_Storage_population();
 
-
             List_Info_Types.Sort();
             comboBox_Info_Type.DataSource = List_Info_Types;
             listBox_Info_IDtoName.DataSource = List_Info_IDtoName;
@@ -97,8 +89,7 @@ namespace Test_NavalAction_Tool
             textBox_Storage_LH_Labour_Contracts_Quantity.TextChanged += new EventHandler(textBox_Storage_LH_Labour_Contracts_Quantity_TextChanged);
             textBox_Storage_LH_LabourContracts_Price.TextChanged += new EventHandler(textBox_Storage_LH_LabourContracts_Price_TextChanged);
 
-
-            #region вкладка Крафта
+            #region tab: Craft
 
             foreach (SortedDictionary<string, object> current3 in ItemTemplates)
             {
@@ -166,13 +157,9 @@ namespace Test_NavalAction_Tool
             JsonConvert.SerializeObject(SD_Craft_Recipes_custom_sorted, Formatting.Indented);
              */
 
-
             #endregion
 
             SpeedCurves_Graphics_Draw();
-
-
-
         }
 
         public void func_json_ItemTemplates_deserialise()
