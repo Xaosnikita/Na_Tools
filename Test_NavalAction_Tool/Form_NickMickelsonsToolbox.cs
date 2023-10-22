@@ -113,8 +113,8 @@ namespace Test_NavalAction_Tool
 
                 if (current3["ItemType"].ToString() == "Ship")
                 {
-                    Ship value4 = JsonConvert.DeserializeObject<Ship>(JsonConvert.SerializeObject(current3, Formatting.Indented));
-                    SD_ShipsTempates.Add(current3["Name"].ToString(), value4);
+                    Ship ShipTemplateName = JsonConvert.DeserializeObject<Ship>(JsonConvert.SerializeObject(current3, Formatting.Indented));
+                    SD_ShipsTempates.Add(current3["Name"].ToString(), ShipTemplateName);
                 }
             }
             Dict_Craft_Trim_Extra.Add("Random", new List<string>());
@@ -457,7 +457,7 @@ namespace Test_NavalAction_Tool
                 num3++;
             }
         }
-
+        /*Automatic drawing for Storage tab*/
         private void func_func_Storage_Tab_Resource_top_Controls_Drawings()
         {
             Label label = new Label();
@@ -676,7 +676,7 @@ namespace Test_NavalAction_Tool
             textBox_Storage_LH_LabourHours_Price.Text = Storage.Storage_LabourHours[0].Price.ToString();
             textBox_Storage_LH_Labour_Contracts_Quantity.Text = Storage.Storage_LabourHours[1].Quantity.ToString();
             textBox_Storage_LH_LabourContracts_Price.Text = Storage.Storage_LabourHours[1].Price.ToString();
-            MessageBox.Show("Файл открыт");
+            MessageBox.Show("Opened");
         }
 
         private void button_Storage_Save_Click(object sender, EventArgs e)
@@ -688,7 +688,7 @@ namespace Test_NavalAction_Tool
             string arg_28_0 = saveFileDialog_Storage.FileName;
             string contents = JsonConvert.SerializeObject(Storage, Formatting.Indented);
             File.WriteAllText(arg_28_0, contents);
-            MessageBox.Show("Файл сохранен");
+            MessageBox.Show("Saved");
         }
 
         private void radioButton_Craft_Ship_CheckedChanged(object sender, EventArgs e)

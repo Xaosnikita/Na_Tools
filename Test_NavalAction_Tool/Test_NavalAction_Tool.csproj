@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes_Crafting.cs" />
+    <Compile Include="Classes_Storage.cs" />
     <Compile Include="Class_Nations.cs" />
     <Compile Include="Class_Ports.cs" />
     <Compile Include="Classes_Item_Templates.cs" />
