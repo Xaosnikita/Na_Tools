@@ -54,31 +54,27 @@ namespace Test_NavalAction_Tool
 
             InitializeComponent();
 
+            #region Deserialise functions call
             func_json_ItemTemplates_deserialise();
             func_json_Ports_deserialise();
             func_json_Shops_deserialise();
             func_json_Nations_deserialise();
+            #endregion
 
+            #region WIP-Is it possible to add interactive map?
             panel_PBActiveMap.Controls.Add(pictureBox_ActiveMap);
             Controls.Add(panel_PBActiveMap);
             MouseWheel += OnMouseWheel;
+            #endregion
 
-            foreach (SortedDictionary<string, object> current in ItemTemplates)
-            {
-                if (!List_Info_Types.Contains(current["ItemType"].ToString()))
-                {
-                    List_Info_Types.Add(current["ItemType"].ToString());
-                }
-                SDictionary_Info_IDtoName.Add(Convert.ToInt32(current["Id"].ToString()), current["Name"].ToString());
-            }
-            foreach (KeyValuePair<int, string> current2 in SDictionary_Info_IDtoName)
-            {
-                List_Info_IDtoName.Add(current2.Key.ToString() + "        " + current2.Value);
-            }
-
+            #region Sorted Dictionaries populating functions calls
+            func_SDictionary_Info_IDtoName_populating();
+            func_List_Info_IDtoName_populating();
             Storage = func_Storage_population();
-
             List_Info_Types.Sort();
+            #endregion
+
+            #region Storage Tab
             comboBox_Info_Type.DataSource = List_Info_Types;
             listBox_Info_IDtoName.DataSource = List_Info_IDtoName;
             comboBox_Info_Type.SelectedIndexChanged += new EventHandler(comboBox_Type_SelectedIndexChanged);
@@ -88,35 +84,55 @@ namespace Test_NavalAction_Tool
             textBox_Storage_LH_LabourHours_Price.TextChanged += new EventHandler(textBox_Storage_LH_LabourHours_Price_TextChanged);
             textBox_Storage_LH_Labour_Contracts_Quantity.TextChanged += new EventHandler(textBox_Storage_LH_Labour_Contracts_Quantity_TextChanged);
             textBox_Storage_LH_LabourContracts_Price.TextChanged += new EventHandler(textBox_Storage_LH_LabourContracts_Price_TextChanged);
+            #endregion
 
-            #region tab: Craft
+            #region Craft Tab
 
-            foreach (SortedDictionary<string, object> current3 in ItemTemplates)
+            func_Recipes_in_CraftTab_populating();
+
+            func_Dict_Craft_Trim_Extra_populating();
+            /*
+             SD_Craft_Recipes_custom = func_SD_Craft_Recipes_custom_Population();
+            JsonConvert.SerializeObject(SD_Craft_Recipes_custom, Formatting.Indented);
+            SD_Craft_Recipes_custom_sorted = func_SD_Craft_Recipes_custom_FlagSort(SD_Craft_Recipes_custom);
+            JsonConvert.SerializeObject(SD_Craft_Recipes_custom_sorted, Formatting.Indented);
+             */
+            #endregion
+            //Speed comparement Tab drawing
+            SpeedCurves_Graphics_Draw();
+        }
+
+        public void func_Recipes_in_CraftTab_populating()
+        {
+            foreach(SortedDictionary<string, object> obj in ItemTemplates)
             {
-                /*
-                 *                 if (current3["ItemType"].ToString() == "RecipeShip")
-                {
-                    RecipeShip value = JsonConvert.DeserializeObject<RecipeShip>(JsonConvert.SerializeObject(current3, Formatting.Indented));
-                    SDictionary_Craft_ShipRecipes.Add(current3["Name"].ToString().Remove(current3["Name"].ToString().IndexOf(" Blueprint")), value);
-                }
-                if (current3["ItemType"].ToString() == "RecipeModule")
-                {
-                    RecipeModule value2 = JsonConvert.DeserializeObject<RecipeModule>(JsonConvert.SerializeObject(current3, Formatting.Indented));
-                    SDictionary_Craft_ModuleRecipes.Add(current3["Name"].ToString().Remove(current3["Name"].ToString().IndexOf(" Blueprint")), value2);
-                }
-                if (current3["ItemType"].ToString() == "Recipe")
-                {
-                    Recipe value3 = JsonConvert.DeserializeObject<Recipe>(JsonConvert.SerializeObject(current3, Formatting.Indented));
-                    SDictionary_Craft_Recipes.Add(current3["Name"].ToString().Remove(current3["Name"].ToString().IndexOf(" Blueprint")), value3);
-                }
-                 */
 
-                if (current3["ItemType"].ToString() == "Ship")
+                if(obj["ItemType"].ToString() == "RecipeShip")
                 {
-                    Ship ShipTemplateName = JsonConvert.DeserializeObject<Ship>(JsonConvert.SerializeObject(current3, Formatting.Indented));
-                    SD_ShipsTempates.Add(current3["Name"].ToString(), ShipTemplateName);
+                    RecipeShip recipe = JsonConvert.DeserializeObject<RecipeShip>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                    SDictionary_Craft_ShipRecipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), recipe);
+                }
+                if(obj["ItemType"].ToString() == "RecipeModule")
+                {
+                    RecipeModule recipe = JsonConvert.DeserializeObject<RecipeModule>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                    SDictionary_Craft_ModuleRecipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), recipe);
+                }
+                if(obj["ItemType"].ToString() == "Recipe")
+                {
+                    Recipe recipe = JsonConvert.DeserializeObject<Recipe>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                    SDictionary_Craft_Recipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), recipe);
+                }
+
+                if(obj["ItemType"].ToString() == "Ship")
+                {
+                    Ship ShipTemplateName = JsonConvert.DeserializeObject<Ship>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                    SD_ShipsTempates.Add(obj["Name"].ToString(), ShipTemplateName);
                 }
             }
+        }
+
+        public void func_Dict_Craft_Trim_Extra_populating()
+        {
             Dict_Craft_Trim_Extra.Add("Random", new List<string>());
             Dict_Craft_Trim_Extra.Add("Build Strength", new List<string>
             {
@@ -149,19 +165,29 @@ namespace Test_NavalAction_Tool
                 "Teak Log",
                 "Compass Wood"
             });
-
-            /*
-             * SD_Craft_Recipes_custom = func_SD_Craft_Recipes_custom_Population();
-            JsonConvert.SerializeObject(SD_Craft_Recipes_custom, Formatting.Indented);
-            SD_Craft_Recipes_custom_sorted = func_SD_Craft_Recipes_custom_FlagSort(SD_Craft_Recipes_custom);
-            JsonConvert.SerializeObject(SD_Craft_Recipes_custom_sorted, Formatting.Indented);
-             */
-
-            #endregion
-
-            SpeedCurves_Graphics_Draw();
         }
+        
+        public void func_SDictionary_Info_IDtoName_populating()
+        {
+            foreach(SortedDictionary<string, object> item in ItemTemplates)
+            {
+                if(!List_Info_Types.Contains(item["ItemType"].ToString()))
+                {
+                    List_Info_Types.Add(item["ItemType"].ToString());
+                }
+                SDictionary_Info_IDtoName.Add(Convert.ToInt32(item["Id"].ToString()), item["Name"].ToString());
+            }
+        }
+        
+        public void func_List_Info_IDtoName_populating()
+        {
 
+            foreach(KeyValuePair<int, string> item in SDictionary_Info_IDtoName)
+            {
+                List_Info_IDtoName.Add(item.Key.ToString() + "        " + item.Value);
+            }
+        }
+        
         public void func_json_ItemTemplates_deserialise()
         {
             string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/ItemTemplates_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
@@ -175,7 +201,7 @@ namespace Test_NavalAction_Tool
 
             ItemTemplates = JsonConvert.DeserializeObject<List<SortedDictionary<string, object>>>(text);
         }
-
+        
         public void func_json_Ports_deserialise()
         {
             string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/Ports_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
@@ -189,7 +215,7 @@ namespace Test_NavalAction_Tool
 
             List_Ports = JsonConvert.DeserializeObject<List<Port>>(text);
         }
-
+        
         public void func_json_Shops_deserialise()
         {
             string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/Shops_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
@@ -203,7 +229,7 @@ namespace Test_NavalAction_Tool
 
             List_Shops = JsonConvert.DeserializeObject<List<Shop>>(text);
         }
-
+        
         public void func_json_Nations_deserialise()
         {
             string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/Nations_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
@@ -217,31 +243,31 @@ namespace Test_NavalAction_Tool
 
             Nations = JsonConvert.DeserializeObject<Nations>(text);
         }
-
+        
         private void textBox__Storage_Resource_Quantity_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             Storage_Resources[] storage_Resources = Storage.Storage_Resources;
             for (int i = 0; i < storage_Resources.Length; i++)
             {
-                Storage_Resources storage_Resources2 = storage_Resources[i];
-                if (storage_Resources2.Name == textBox.Name.Substring("textBox_Storage_Resource_Quantity_".Length))
+                Storage_Resources storage_Resources_i = storage_Resources[i];
+                if (storage_Resources_i.Name == textBox.Name.Substring("textBox_Storage_Resource_Quantity_".Length))
                 {
-                    storage_Resources2.Quantity = Convert.ToInt32(textBox.Text);
+                    storage_Resources_i.Quantity = Convert.ToInt32(textBox.Text);
                 }
             }
         }
-
+        
         private void textBox__Storage_Resource_Price_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             Storage_Resources[] storage_Resources = Storage.Storage_Resources;
             for (int i = 0; i < storage_Resources.Length; i++)
             {
-                Storage_Resources storage_Resources2 = storage_Resources[i];
-                if (storage_Resources2.Name == textBox.Name.Substring("textBox_Storage_Resource_Price_".Length))
+                Storage_Resources storage_Resources_i = storage_Resources[i];
+                if (storage_Resources_i.Name == textBox.Name.Substring("textBox_Storage_Resource_Price_".Length))
                 {
-                    storage_Resources2.Price = Convert.ToInt32(textBox.Text);
+                    storage_Resources_i.Price = Convert.ToInt32(textBox.Text);
                 }
             }
         }
@@ -252,10 +278,10 @@ namespace Test_NavalAction_Tool
             Storage_Materials[] storage_Materials = Storage.Storage_Materials;
             for (int i = 0; i < storage_Materials.Length; i++)
             {
-                Storage_Materials storage_Materials2 = storage_Materials[i];
-                if (storage_Materials2.Name == textBox.Name.Substring("textBox_Storage_Materials_Quantity_".Length))
+                Storage_Materials storage_Materials_i = storage_Materials[i];
+                if (storage_Materials_i.Name == textBox.Name.Substring("textBox_Storage_Materials_Quantity_".Length))
                 {
-                    storage_Materials2.Quantity = Convert.ToInt32(textBox.Text);
+                    storage_Materials_i.Quantity = Convert.ToInt32(textBox.Text);
                 }
             }
         }
@@ -370,20 +396,20 @@ namespace Test_NavalAction_Tool
             Storage_Resources[] storage_Resources = Storage.Storage_Resources;
             for (int i = 0; i < storage_Resources.Length; i++)
             {
-                Storage_Resources storage_Resources2 = storage_Resources[i];
+                Storage_Resources storage_Resources_i = storage_Resources[i];
                 if (radioButton_Storage_All.Checked)
                 {
-                    func_Storage_Tab_Resource_Controls_Drawings(num, storage_Resources2);
+                    func_Storage_Tab_Resource_Controls_Drawings(num, storage_Resources_i);
                     num++;
                 }
-                if (radioButton_Storage_Craft.Checked && storage_Resources2.ProducedByNation == -1)
+                if (radioButton_Storage_Craft.Checked && storage_Resources_i.ProducedByNation == -1)
                 {
-                    func_Storage_Tab_Resource_Controls_Drawings(num, storage_Resources2);
+                    func_Storage_Tab_Resource_Controls_Drawings(num, storage_Resources_i);
                     num++;
                 }
-                if (radioButton_Storage_Trade.Checked && storage_Resources2.ProducedByNation != -1)
+                if (radioButton_Storage_Trade.Checked && storage_Resources_i.ProducedByNation != -1)
                 {
-                    func_Storage_Tab_Resource_Controls_Drawings(num, storage_Resources2);
+                    func_Storage_Tab_Resource_Controls_Drawings(num, storage_Resources_i);
                     num++;
                 }
             }
@@ -391,53 +417,53 @@ namespace Test_NavalAction_Tool
             Storage_Materials[] storage_Materials = Storage.Storage_Materials;
             for (int i = 0; i < storage_Materials.Length; i++)
             {
-                Storage_Materials storage_Materials2 = storage_Materials[i];
-                Label label = new Label();
-                label.Name = "label_Storage_Materials_" + storage_Materials2.Name;
-                label.AutoSize = true;
-                label.Location = new Point(label_Storage_Materials_Name.Location.X, label_Storage_Materials_Name.Location.Y + num2 * label.Height);
-                label.Size = new Size(38, 13);
-                label.TabIndex = 0;
-                label.TextAlign = ContentAlignment.MiddleCenter;
-                label.Text = storage_Materials2.Name;
-                groupBox_Storage_Materials.Controls.Add(label);
-                TextBox textBox = new TextBox();
-                textBox.Name = "textBox_Storage_Materials_Quantity_" + storage_Materials2.Name;
-                textBox.Location = new Point(label_Storage_Materials_Quantity.Location.X, label.Location.Y - 3);
-                textBox.Size = new Size(40, 20);
-                textBox.TabIndex = 0;
-                textBox.TextAlign = HorizontalAlignment.Center;
-                textBox.Text = storage_Materials2.Quantity.ToString();
-                textBox.TextChanged += new EventHandler(textBox__Storage_Materials_Quantity_TextChanged);
-                groupBox_Storage_Materials.Controls.Add(textBox);
-                Label label2 = new Label();
-                label2.AutoSize = false;
-                label2.Name = "label_Storage_Materials_Price_" + storage_Materials2.Name;
-                label2.Location = new Point(label_Storage_Materials_Price.Location.X, label.Location.Y);
-                label2.Size = new Size(label_Storage_Materials_Price.Size.Width, 13);
-                label2.TabIndex = 0;
-                label2.TextAlign = ContentAlignment.MiddleCenter;
-                label2.Text = storage_Materials2.BasePrice.ToString();
-                groupBox_Storage_Materials.Controls.Add(label2);
-                Label label3 = new Label();
-                label3.AutoSize = false;
-                label3.Name = "label_Storage_Materials_BP_" + storage_Materials2.Name;
-                label3.Location = new Point(label_Storage_Materials_BasePrice.Location.X, label.Location.Y);
-                label3.Size = new Size(label_Storage_Materials_BasePrice.Size.Width, 13);
-                label3.TabIndex = 0;
-                label3.TextAlign = ContentAlignment.MiddleCenter;
-                label3.Text = storage_Materials2.BasePrice.ToString();
-                groupBox_Storage_Materials.Controls.Add(label3);
-                Label label4 = new Label();
-                label4.Name = "label_Storage_Materials_Weight_" + storage_Materials2.Name;
-                label4.AutoSize = false;
-                label4.Location = new Point(label_Storage_Materials_ItemWeight.Location.X, label.Location.Y);
-                label4.Size = new Size(label_Storage_Materials_ItemWeight.Size.Width, 13);
-                label4.TabIndex = 0;
-                label4.TextAlign = ContentAlignment.MiddleCenter;
-                label4.Text = storage_Materials2.ItemWeight.ToString();
-                groupBox_Storage_Materials.Controls.Add(label4);
-                groupBox_Storage_Materials.Size = new Size(groupBox_Storage_Materials.Size.Width, label.Location.Y + label.Height + 10);
+                Storage_Materials storage_Materials_i = storage_Materials[i];
+                Label label_Storage_Materials_ = new Label();
+                label_Storage_Materials_.Name = "label_Storage_Materials_" + storage_Materials_i.Name;
+                label_Storage_Materials_.AutoSize = true;
+                label_Storage_Materials_.Location = new Point(label_Storage_Materials_Name.Location.X, label_Storage_Materials_Name.Location.Y + num2 * label_Storage_Materials_.Height);
+                label_Storage_Materials_.Size = new Size(38, 13);
+                label_Storage_Materials_.TabIndex = 0;
+                label_Storage_Materials_.TextAlign = ContentAlignment.MiddleCenter;
+                label_Storage_Materials_.Text = storage_Materials_i.Name;
+                groupBox_Storage_Materials.Controls.Add(label_Storage_Materials_);
+                TextBox textBox_Storage_Materials_Quantity_ = new TextBox();
+                textBox_Storage_Materials_Quantity_.Name = "textBox_Storage_Materials_Quantity_" + storage_Materials_i.Name;
+                textBox_Storage_Materials_Quantity_.Location = new Point(label_Storage_Materials_Quantity.Location.X, label_Storage_Materials_.Location.Y - 3);
+                textBox_Storage_Materials_Quantity_.Size = new Size(40, 20);
+                textBox_Storage_Materials_Quantity_.TabIndex = 0;
+                textBox_Storage_Materials_Quantity_.TextAlign = HorizontalAlignment.Center;
+                textBox_Storage_Materials_Quantity_.Text = storage_Materials_i.Quantity.ToString();
+                textBox_Storage_Materials_Quantity_.TextChanged += new EventHandler(textBox__Storage_Materials_Quantity_TextChanged);
+                groupBox_Storage_Materials.Controls.Add(textBox_Storage_Materials_Quantity_);
+                Label label_Storage_Materials_Price_ = new Label();
+                label_Storage_Materials_Price_.AutoSize = false;
+                label_Storage_Materials_Price_.Name = "label_Storage_Materials_Price_" + storage_Materials_i.Name;
+                label_Storage_Materials_Price_.Location = new Point(label_Storage_Materials_Price.Location.X, label_Storage_Materials_.Location.Y);
+                label_Storage_Materials_Price_.Size = new Size(label_Storage_Materials_Price.Size.Width, 13);
+                label_Storage_Materials_Price_.TabIndex = 0;
+                label_Storage_Materials_Price_.TextAlign = ContentAlignment.MiddleCenter;
+                label_Storage_Materials_Price_.Text = storage_Materials_i.BasePrice.ToString();
+                groupBox_Storage_Materials.Controls.Add(label_Storage_Materials_Price_);
+                Label label_Storage_Materials_BP_ = new Label();
+                label_Storage_Materials_BP_.AutoSize = false;
+                label_Storage_Materials_BP_.Name = "label_Storage_Materials_BP_" + storage_Materials_i.Name;
+                label_Storage_Materials_BP_.Location = new Point(label_Storage_Materials_BasePrice.Location.X, label_Storage_Materials_.Location.Y);
+                label_Storage_Materials_BP_.Size = new Size(label_Storage_Materials_BasePrice.Size.Width, 13);
+                label_Storage_Materials_BP_.TabIndex = 0;
+                label_Storage_Materials_BP_.TextAlign = ContentAlignment.MiddleCenter;
+                label_Storage_Materials_BP_.Text = storage_Materials_i.BasePrice.ToString();
+                groupBox_Storage_Materials.Controls.Add(label_Storage_Materials_BP_);
+                Label label_Storage_Materials_Weight_ = new Label();
+                label_Storage_Materials_Weight_.Name = "label_Storage_Materials_Weight_" + storage_Materials_i.Name;
+                label_Storage_Materials_Weight_.AutoSize = false;
+                label_Storage_Materials_Weight_.Location = new Point(label_Storage_Materials_ItemWeight.Location.X, label_Storage_Materials_.Location.Y);
+                label_Storage_Materials_Weight_.Size = new Size(label_Storage_Materials_ItemWeight.Size.Width, 13);
+                label_Storage_Materials_Weight_.TabIndex = 0;
+                label_Storage_Materials_Weight_.TextAlign = ContentAlignment.MiddleCenter;
+                label_Storage_Materials_Weight_.Text = storage_Materials_i.ItemWeight.ToString();
+                groupBox_Storage_Materials.Controls.Add(label_Storage_Materials_Weight_);
+                groupBox_Storage_Materials.Size = new Size(groupBox_Storage_Materials.Size.Width, label_Storage_Materials_.Location.Y + label_Storage_Materials_.Height + 10);
                 num2++;
             }
             textBox_Storage_LH_Labour_Hours_Quantity.Text = Storage.Storage_LabourHours[0].Quantity.ToString();
@@ -448,11 +474,11 @@ namespace Test_NavalAction_Tool
             Storage_Ship_Recipes[] storage_Ship_Recipes = Storage.Storage_Ship_Recipes;
             for (int i = 0; i < storage_Ship_Recipes.Length; i++)
             {
-                Storage_Ship_Recipes storage_Ship_Recipes2 = storage_Ship_Recipes[i];
+                Storage_Ship_Recipes storage_Ship_Recipes_i = storage_Ship_Recipes[i];
                 int num3 = 0;
                 bool value = false;
-                value = SDictionary_Storage_ShipRecipes.TryGetValue(storage_Ship_Recipes2.Name, out value);
-                checkedListBox_Storage_ShipRecipes.Items.Add(storage_Ship_Recipes2.Name);
+                value = SDictionary_Storage_ShipRecipes.TryGetValue(storage_Ship_Recipes_i.Name, out value);
+                checkedListBox_Storage_ShipRecipes.Items.Add(storage_Ship_Recipes_i.Name);
                 checkedListBox_Storage_ShipRecipes.SetItemChecked(num3, value);
                 num3++;
             }
@@ -460,110 +486,110 @@ namespace Test_NavalAction_Tool
         /*Automatic drawing for Storage tab*/
         private void func_func_Storage_Tab_Resource_top_Controls_Drawings()
         {
-            Label label = new Label();
-            label.Location = new Point(329, 20);
-            label.Name = "label_Storage_Resources_AutoBuy";
-            label.Size = new Size(74, 13);
-            label.TabIndex = 5;
-            label.Text = "Auto Fill Price:";
-            label.TextAlign = ContentAlignment.MiddleCenter;
-            Label label2 = new Label();
-            label2.Location = new Point(279, 20);
-            label2.Name = "label_Storage_Resources_ItemWeight";
-            label2.Size = new Size(44, 13);
-            label2.TabIndex = 4;
-            label2.Text = "Weight:";
-            label2.TextAlign = ContentAlignment.MiddleCenter;
-            Label label3 = new Label();
-            label3.Location = new Point(212, 20);
-            label3.Name = "label_Storage_Resources_BasePrice";
-            label3.Size = new Size(61, 13);
-            label3.TabIndex = 3;
-            label3.Text = "Base Price:";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
-            Label label4 = new Label();
-            label4.AutoSize = true;
-            label4.Location = new Point(172, 20);
-            label4.Name = "label_Storage_Resources_Price";
-            label4.Size = new Size(34, 13);
-            label4.TabIndex = 2;
-            label4.Text = "Price:";
-            Label label5 = new Label();
-            label5.AutoSize = true;
-            label5.Location = new Point(117, 20);
-            label5.Name = "label_Storage_Resources_Quantity";
-            label5.Size = new Size(49, 13);
-            label5.TabIndex = 1;
-            label5.Text = "Quantity:";
-            Label label6 = new Label();
-            label6.Location = new Point(6, 20);
-            label6.Name = "label_Storage_Resources_Name";
-            label6.Size = new Size(105, 13);
-            label6.TabIndex = 0;
-            label6.Text = "Name:";
-            label6.TextAlign = ContentAlignment.MiddleCenter;
-            groupBox_Storage_Resources.Controls.Add(label);
-            groupBox_Storage_Resources.Controls.Add(label2);
-            groupBox_Storage_Resources.Controls.Add(label3);
-            groupBox_Storage_Resources.Controls.Add(label4);
-            groupBox_Storage_Resources.Controls.Add(label5);
-            groupBox_Storage_Resources.Controls.Add(label6);
+            Label label_Storage_Resources_AutoBuy = new Label();
+            label_Storage_Resources_AutoBuy.Location = new Point(329, 20);
+            label_Storage_Resources_AutoBuy.Name = "label_Storage_Resources_AutoBuy";
+            label_Storage_Resources_AutoBuy.Size = new Size(74, 13);
+            label_Storage_Resources_AutoBuy.TabIndex = 5;
+            label_Storage_Resources_AutoBuy.Text = "Auto Fill Price:";
+            label_Storage_Resources_AutoBuy.TextAlign = ContentAlignment.MiddleCenter;
+            Label label_Storage_Resources_ItemWeight = new Label();
+            label_Storage_Resources_ItemWeight.Location = new Point(279, 20);
+            label_Storage_Resources_ItemWeight.Name = "label_Storage_Resources_ItemWeight";
+            label_Storage_Resources_ItemWeight.Size = new Size(44, 13);
+            label_Storage_Resources_ItemWeight.TabIndex = 4;
+            label_Storage_Resources_ItemWeight.Text = "Weight:";
+            label_Storage_Resources_ItemWeight.TextAlign = ContentAlignment.MiddleCenter;
+            Label label_Storage_Resources_BasePrice = new Label();
+            label_Storage_Resources_BasePrice.Location = new Point(212, 20);
+            label_Storage_Resources_BasePrice.Name = "label_Storage_Resources_BasePrice";
+            label_Storage_Resources_BasePrice.Size = new Size(61, 13);
+            label_Storage_Resources_BasePrice.TabIndex = 3;
+            label_Storage_Resources_BasePrice.Text = "Base Price:";
+            label_Storage_Resources_BasePrice.TextAlign = ContentAlignment.MiddleCenter;
+            Label label_Storage_Resources_Price = new Label();
+            label_Storage_Resources_Price.AutoSize = true;
+            label_Storage_Resources_Price.Location = new Point(172, 20);
+            label_Storage_Resources_Price.Name = "label_Storage_Resources_Price";
+            label_Storage_Resources_Price.Size = new Size(34, 13);
+            label_Storage_Resources_Price.TabIndex = 2;
+            label_Storage_Resources_Price.Text = "Price:";
+            Label label_Storage_Resources_Quantity = new Label();
+            label_Storage_Resources_Quantity.AutoSize = true;
+            label_Storage_Resources_Quantity.Location = new Point(117, 20);
+            label_Storage_Resources_Quantity.Name = "label_Storage_Resources_Quantity";
+            label_Storage_Resources_Quantity.Size = new Size(49, 13);
+            label_Storage_Resources_Quantity.TabIndex = 1;
+            label_Storage_Resources_Quantity.Text = "Quantity:";
+            Label label_Storage_Resources_Name = new Label();
+            label_Storage_Resources_Name.Location = new Point(6, 20);
+            label_Storage_Resources_Name.Name = "label_Storage_Resources_Name";
+            label_Storage_Resources_Name.Size = new Size(105, 13);
+            label_Storage_Resources_Name.TabIndex = 0;
+            label_Storage_Resources_Name.Text = "Name:";
+            label_Storage_Resources_Name.TextAlign = ContentAlignment.MiddleCenter;
+            groupBox_Storage_Resources.Controls.Add(label_Storage_Resources_AutoBuy);
+            groupBox_Storage_Resources.Controls.Add(label_Storage_Resources_ItemWeight);
+            groupBox_Storage_Resources.Controls.Add(label_Storage_Resources_BasePrice);
+            groupBox_Storage_Resources.Controls.Add(label_Storage_Resources_Price);
+            groupBox_Storage_Resources.Controls.Add(label_Storage_Resources_Quantity);
+            groupBox_Storage_Resources.Controls.Add(label_Storage_Resources_Name);
         }
 
         private void func_Storage_Tab_Resource_Controls_Drawings(int i_Storage_resource, Storage_Resources Item)
         {
-            Label label = new Label();
-            label.Name = "label_Storage_Resource_" + Item.Name;
-            label.AutoSize = true;
-            label.Location = new Point(groupBox_Storage_Resources.Location.X, label_Storage_Resources_Name.Location.Y + i_Storage_resource * label.Height);
-            label.Size = new Size(38, 13);
-            label.TabIndex = 0;
-            label.TextAlign = ContentAlignment.MiddleCenter;
-            label.Text = Item.Name;
-            groupBox_Storage_Resources.Controls.Add(label);
-            TextBox textBox = new TextBox();
-            textBox.Name = "textBox_Storage_Resource_Quantity_" + Item.Name;
-            textBox.Location = new Point(label_Storage_Resources_Quantity.Location.X, label.Location.Y - 3);
-            textBox.Size = new Size(40, 20);
-            textBox.TabIndex = 0;
-            textBox.TextAlign = HorizontalAlignment.Center;
-            textBox.Text = Item.Quantity.ToString();
-            textBox.TextChanged += new EventHandler(textBox__Storage_Resource_Quantity_TextChanged);
-            groupBox_Storage_Resources.Controls.Add(textBox);
-            TextBox textBox2 = new TextBox();
-            textBox2.Name = "textBox_Storage_Resource_Price_" + Item.Name;
-            textBox2.Location = new Point(label_Storage_Resources_Price.Location.X, label.Location.Y - 3);
-            textBox2.Size = new Size(40, 20);
-            textBox2.TabIndex = 0;
-            textBox2.TextAlign = HorizontalAlignment.Center;
-            textBox2.Text = Item.Price.ToString();
-            textBox2.TextChanged += new EventHandler(textBox__Storage_Resource_Price_TextChanged);
-            groupBox_Storage_Resources.Controls.Add(textBox2);
-            Label label2 = new Label();
-            label2.AutoSize = false;
-            label2.Name = "label_Storage_Resource_BP_" + Item.Name;
-            label2.Location = new Point(label_Storage_Resources_BasePrice.Location.X, label.Location.Y);
-            label2.Size = new Size(label_Storage_Resources_BasePrice.Size.Width, 13);
-            label2.TabIndex = 0;
-            label2.TextAlign = ContentAlignment.MiddleCenter;
-            label2.Text = Item.BasePrice.ToString();
-            groupBox_Storage_Resources.Controls.Add(label2);
-            Label label3 = new Label();
-            label3.Name = "label_Storage_Resource_Weight_" + Item.Name;
-            label3.AutoSize = false;
-            label3.Location = new Point(label_Storage_Resources_ItemWeight.Location.X, label.Location.Y);
-            label3.Size = new Size(label_Storage_Resources_ItemWeight.Size.Width, 13);
-            label3.TabIndex = 0;
-            label3.TextAlign = ContentAlignment.MiddleCenter;
-            label3.Text = Item.ItemWeight.ToString();
-            groupBox_Storage_Resources.Controls.Add(label3);
-            Label label4 = new Label();
-            label4.Name = "label_Storage_Resource_AutoFillPrice_" + Item.Name;
-            label4.AutoSize = false;
-            label4.Location = new Point(label_Storage_Resources_AutoBuy.Location.X, label.Location.Y);
-            label4.Size = new Size(label_Storage_Resources_AutoBuy.Size.Width, 13);
-            label4.TabIndex = 0;
-            label4.TextAlign = ContentAlignment.MiddleCenter;
+            Label label_Storage_Resource_ = new Label();
+            label_Storage_Resource_.Name = "label_Storage_Resource_" + Item.Name;
+            label_Storage_Resource_.AutoSize = true;
+            label_Storage_Resource_.Location = new Point(groupBox_Storage_Resources.Location.X, label_Storage_Resources_Name.Location.Y + i_Storage_resource * label_Storage_Resource_.Height);
+            label_Storage_Resource_.Size = new Size(38, 13);
+            label_Storage_Resource_.TabIndex = 0;
+            label_Storage_Resource_.TextAlign = ContentAlignment.MiddleCenter;
+            label_Storage_Resource_.Text = Item.Name;
+            groupBox_Storage_Resources.Controls.Add(label_Storage_Resource_);
+            TextBox textBox_Storage_Resource_Quantity_ = new TextBox();
+            textBox_Storage_Resource_Quantity_.Name = "textBox_Storage_Resource_Quantity_" + Item.Name;
+            textBox_Storage_Resource_Quantity_.Location = new Point(label_Storage_Resources_Quantity.Location.X, label_Storage_Resource_.Location.Y - 3);
+            textBox_Storage_Resource_Quantity_.Size = new Size(40, 20);
+            textBox_Storage_Resource_Quantity_.TabIndex = 0;
+            textBox_Storage_Resource_Quantity_.TextAlign = HorizontalAlignment.Center;
+            textBox_Storage_Resource_Quantity_.Text = Item.Quantity.ToString();
+            textBox_Storage_Resource_Quantity_.TextChanged += new EventHandler(textBox__Storage_Resource_Quantity_TextChanged);
+            groupBox_Storage_Resources.Controls.Add(textBox_Storage_Resource_Quantity_);
+            TextBox textBox_Storage_Resource_Price_ = new TextBox();
+            textBox_Storage_Resource_Price_.Name = "textBox_Storage_Resource_Price_" + Item.Name;
+            textBox_Storage_Resource_Price_.Location = new Point(label_Storage_Resources_Price.Location.X, label_Storage_Resource_.Location.Y - 3);
+            textBox_Storage_Resource_Price_.Size = new Size(40, 20);
+            textBox_Storage_Resource_Price_.TabIndex = 0;
+            textBox_Storage_Resource_Price_.TextAlign = HorizontalAlignment.Center;
+            textBox_Storage_Resource_Price_.Text = Item.Price.ToString();
+            textBox_Storage_Resource_Price_.TextChanged += new EventHandler(textBox__Storage_Resource_Price_TextChanged);
+            groupBox_Storage_Resources.Controls.Add(textBox_Storage_Resource_Price_);
+            Label label_Storage_Resource_BP_ = new Label();
+            label_Storage_Resource_BP_.AutoSize = false;
+            label_Storage_Resource_BP_.Name = "label_Storage_Resource_BP_" + Item.Name;
+            label_Storage_Resource_BP_.Location = new Point(label_Storage_Resources_BasePrice.Location.X, label_Storage_Resource_.Location.Y);
+            label_Storage_Resource_BP_.Size = new Size(label_Storage_Resources_BasePrice.Size.Width, 13);
+            label_Storage_Resource_BP_.TabIndex = 0;
+            label_Storage_Resource_BP_.TextAlign = ContentAlignment.MiddleCenter;
+            label_Storage_Resource_BP_.Text = Item.BasePrice.ToString();
+            groupBox_Storage_Resources.Controls.Add(label_Storage_Resource_BP_);
+            Label label_Storage_Resource_Weight_ = new Label();
+            label_Storage_Resource_Weight_.Name = "label_Storage_Resource_Weight_" + Item.Name;
+            label_Storage_Resource_Weight_.AutoSize = false;
+            label_Storage_Resource_Weight_.Location = new Point(label_Storage_Resources_ItemWeight.Location.X, label_Storage_Resource_.Location.Y);
+            label_Storage_Resource_Weight_.Size = new Size(label_Storage_Resources_ItemWeight.Size.Width, 13);
+            label_Storage_Resource_Weight_.TabIndex = 0;
+            label_Storage_Resource_Weight_.TextAlign = ContentAlignment.MiddleCenter;
+            label_Storage_Resource_Weight_.Text = Item.ItemWeight.ToString();
+            groupBox_Storage_Resources.Controls.Add(label_Storage_Resource_Weight_);
+            Label label_Storage_Resource_AutoFillPrice_ = new Label();
+            label_Storage_Resource_AutoFillPrice_.Name = "label_Storage_Resource_AutoFillPrice_" + Item.Name;
+            label_Storage_Resource_AutoFillPrice_.AutoSize = false;
+            label_Storage_Resource_AutoFillPrice_.Location = new Point(label_Storage_Resources_AutoBuy.Location.X, label_Storage_Resource_.Location.Y);
+            label_Storage_Resource_AutoFillPrice_.Size = new Size(label_Storage_Resources_AutoBuy.Size.Width, 13);
+            label_Storage_Resource_AutoFillPrice_.TabIndex = 0;
+            label_Storage_Resource_AutoFillPrice_.TextAlign = ContentAlignment.MiddleCenter;
             string text;
             if (Item.AutoFillPrice > 999)
             {
@@ -573,9 +599,9 @@ namespace Test_NavalAction_Tool
             {
                 text = (Item.AutoFillPrice * Item.BasePrice).ToString();
             }
-            label4.Text = text;
-            groupBox_Storage_Resources.Controls.Add(label4);
-            groupBox_Storage_Resources.Size = new Size(groupBox_Storage_Resources.Size.Width, label.Location.Y + label.Height + 10);
+            label_Storage_Resource_AutoFillPrice_.Text = text;
+            groupBox_Storage_Resources.Controls.Add(label_Storage_Resource_AutoFillPrice_);
+            groupBox_Storage_Resources.Size = new Size(groupBox_Storage_Resources.Size.Width, label_Storage_Resource_.Location.Y + label_Storage_Resource_.Height + 10);
         }
 
         private void comboBox_Type_SelectedIndexChanged(object sender, EventArgs e)
@@ -647,29 +673,29 @@ namespace Test_NavalAction_Tool
             Storage_Resources[] storage_Resources = Storage.Storage_Resources;
             for (int i = 0; i < storage_Resources.Length; i++)
             {
-                Storage_Resources storage_Resources2 = storage_Resources[i];
-                string key = "textBox_Storage_Resource_Quantity_" + storage_Resources2.Name;
+                Storage_Resources storage_Resources_i = storage_Resources[i];
+                string key = "textBox_Storage_Resource_Quantity_" + storage_Resources_i.Name;
                 Control[] array = groupBox_Storage_Resources.Controls.Find(key, true);
                 for (int j = 0; j < array.Length; j++)
                 {
-                    array[j].Text = storage_Resources2.Quantity.ToString();
+                    array[j].Text = storage_Resources_i.Quantity.ToString();
                 }
-                string key2 = "textBox_Storage_Resource_Price_" + storage_Resources2.Name;
+                string key2 = "textBox_Storage_Resource_Price_" + storage_Resources_i.Name;
                 array = groupBox_Storage_Resources.Controls.Find(key2, true);
                 for (int j = 0; j < array.Length; j++)
                 {
-                    array[j].Text = storage_Resources2.Price.ToString();
+                    array[j].Text = storage_Resources_i.Price.ToString();
                 }
             }
             Storage_Materials[] storage_Materials = Storage.Storage_Materials;
             for (int i = 0; i < storage_Materials.Length; i++)
             {
-                Storage_Materials storage_Materials2 = storage_Materials[i];
-                string key3 = "textBox_Storage_Materials_Quantity_" + storage_Materials2.Name;
+                Storage_Materials storage_Materials_i = storage_Materials[i];
+                string key3 = "textBox_Storage_Materials_Quantity_" + storage_Materials_i.Name;
                 Control[] array = groupBox_Storage_Materials.Controls.Find(key3, true);
                 for (int j = 0; j < array.Length; j++)
                 {
-                    array[j].Text = storage_Materials2.Quantity.ToString();
+                    array[j].Text = storage_Materials_i.Quantity.ToString();
                 }
             }
             textBox_Storage_LH_Labour_Hours_Quantity.Text = Storage.Storage_LabourHours[0].Quantity.ToString();
@@ -941,10 +967,10 @@ namespace Test_NavalAction_Tool
                     Storage_Materials[] storage_Materials = Storage.Storage_Materials;
                     for (int i = 0; i < storage_Materials.Length; i++)
                     {
-                        Storage_Materials storage_Materials2 = storage_Materials[i];
-                        if (storage_Materials2.Name == text3)
+                        Storage_Materials storage_Materials_i = storage_Materials[i];
+                        if (storage_Materials_i.Name == text3)
                         {
-                            num5 = storage_Materials2.Quantity;
+                            num5 = storage_Materials_i.Quantity;
                             break;
                         }
                     }
@@ -972,10 +998,10 @@ namespace Test_NavalAction_Tool
                     Storage_Resources[] storage_Resources = Storage.Storage_Resources;
                     for (int i = 0; i < storage_Resources.Length; i++)
                     {
-                        Storage_Resources storage_Resources2 = storage_Resources[i];
-                        if (storage_Resources2.Name == text4)
+                        Storage_Resources storage_Resources_i = storage_Resources[i];
+                        if (storage_Resources_i.Name == text4)
                         {
-                            num8 = storage_Resources2.Quantity;
+                            num8 = storage_Resources_i.Quantity;
                         }
                     }
                     int num10 = num9 - num8;
@@ -2118,7 +2144,6 @@ namespace Test_NavalAction_Tool
             func_Tab_Storage_filling();
         }
         #region pictureBox_ActiveMap events
-
         private void pictureBox_ActiveMap_MouseEnter(object sender, EventArgs e)
         {
             mouseInPanel = true;
@@ -2182,7 +2207,6 @@ namespace Test_NavalAction_Tool
             }
 
         }
-
         #endregion
 
         private void Form1_Load(object sender, EventArgs e)

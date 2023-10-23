@@ -721,35 +721,15 @@ namespace Test_NavalAction_Tool
 
         public int GivesXP { get; set; }
 
-        public bool AccessibleByLevel
-        {
-            get;
-            set;
-        }
+        public bool AccessibleByLevel { get; set; }
 
-        public int BreakUpRecipeSpawnChance
-        {
-            get;
-            set;
-        }
+        public int BreakUpRecipeSpawnChance { get; set; }
 
-        public bool DisposeOnUse
-        {
-            get;
-            set;
-        }
+        public bool DisposeOnUse { get; set; }
 
-        public bool CanBeUsedInPort
-        {
-            get;
-            set;
-        }
+        public bool CanBeUsedInPort { get; set; }
 
-        public bool CanBeUsedInOpenWorld
-        {
-            get;
-            set;
-        }
+        public bool CanBeUsedInOpenWorld { get; set; }
     }
 
     public class RecipeShip
@@ -808,59 +788,23 @@ namespace Test_NavalAction_Tool
 
         public int PriceTierQuantity { get; set; }
 
-        public QualityShip[] Qualities
-        {
-            get;
-            set;
-        }
+        public QualityShip[] Qualities { get; set; }
 
-        public int RequiresLevel
-        {
-            get;
-            set;
-        }
+        public int RequiresLevel { get; set; }
 
-        public bool ResetStockOnServerStart
-        {
-            get;
-            set;
-        }
+        public bool ResetStockOnServerStart { get; set; }
 
-        public Result[] Results
-        {
-            get;
-            set;
-        }
+        public Result[] Results { get; set; }
 
-        public bool SellableInShop
-        {
-            get;
-            set;
-        }
+        public bool SellableInShop { get; set; }
 
-        public Sellprice SellPrice
-        {
-            get;
-            set;
-        }
+        public Sellprice SellPrice { get; set; }
 
-        public float SellPriceCoefficient
-        {
-            get;
-            set;
-        }
+        public float SellPriceCoefficient { get; set; }
 
-        public string SortingGroup
-        {
-            get;
-            set;
-        }
+        public string SortingGroup { get; set; }
 
-        public Woodtypedesc[] WoodTypeDescs
-        {
-            get;
-            set;
-        }
+        public Woodtypedesc[] WoodTypeDescs { get; set; }
     }
 
     public class Regular
