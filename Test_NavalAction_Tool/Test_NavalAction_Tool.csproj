@@ -53,16 +53,17 @@
   <ItemGroup>
     <Compile Include="Classes_Crafting.cs" />
     <Compile Include="Classes_Storage.cs" />
-    <Compile Include="Class_Nations.cs" />
-    <Compile Include="Class_Ports.cs" />
-    <Compile Include="Classes_Item_Templates.cs" />
-    <Compile Include="Class_Shops.cs" />
+    <Compile Include="DeserializedClasses\Class_Nations.cs" />
+    <Compile Include="DeserializedClasses\Class_Ports.cs" />
+    <Compile Include="DeserializedClasses\Classes_Item_Templates.cs" />
+    <Compile Include="DeserializedClasses\Class_Shops.cs" />
     <Compile Include="Form_NickMickelsonsToolbox.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form_NickMickelsonsToolbox.Designer.cs">
       <DependentUpon>Form_NickMickelsonsToolbox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\Serialization\JsonDeserializationHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_NickMickelsonsToolbox.resx">
@@ -92,6 +93,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

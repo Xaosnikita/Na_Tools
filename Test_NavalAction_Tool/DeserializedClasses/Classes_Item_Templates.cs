@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace Test_NavalAction_Tool
+﻿namespace Test_NavalAction_Tool
 {
 
     public class Backdeckclasslimit
-    {   
-        public Limitation1 Limitation1 {get; set;}
+    {
+        public Limitation1 Limitation1 { get; set; }
         public Limitation2 Limitation2 { get; set; }
         public Limitation3 Limitation3 { get; set; }
     }
@@ -133,7 +126,7 @@ namespace Test_NavalAction_Tool
 
         public Buyprice_int BuyPrice { get; set; }
     }
-  
+
     public class CrewRepairItem
     {
         public string __type { get; set; }
