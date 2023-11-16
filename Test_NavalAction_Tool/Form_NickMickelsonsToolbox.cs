@@ -14,32 +14,32 @@ namespace Test_NavalAction_Tool
 {
     public partial class Form_NickMickelsonsToolbox : Form
     {
-        #region Definition
+        #region Variables declaration
         private int i_Craft_Add;
         private List<SortedDictionary<string, object>> ItemTemplates;
-        private List<Port> List_Ports = new List<Port>();
-        private List<Shop> List_Shops = new List<Shop>();
+        private List<Port> List_Ports;
+        private List<Shop> List_Shops;
         private Nations Nations;
-        private List<string> List_Info_Types = new List<string>();
-        private List<string> List_Info_IDtoName = new List<string>();
-        private Dictionary<string, SortedDictionary<string, int>> Dict_sorted_by_flag_Name_amount = new Dictionary<string, SortedDictionary<string, int>>();
-        private Storage Storage = new Storage();
-        private List<Storage_LabourHours> List_Storage_LabourHours = new List<Storage_LabourHours>();
-        private List<Storage_Ship_Recipes> List_Storage_Ship_Recipes = new List<Storage_Ship_Recipes>();
-        private SortedDictionary<int, string> SDictionary_Info_IDtoName = new SortedDictionary<int, string>();
-        private SortedDictionary<string, Storage_Resources> SDictionary_Storage_Resource = new SortedDictionary<string, Storage_Resources>();
-        private SortedDictionary<string, Storage_Materials> SDictionary_Storage_Materials = new SortedDictionary<string, Storage_Materials>();
-        private SortedDictionary<string, Storage_LabourHours> SDictionary_Storage_LabourHours = new SortedDictionary<string, Storage_LabourHours>();
-        private SortedDictionary<string, bool> SDictionary_Storage_ShipRecipes = new SortedDictionary<string, bool>();
-        private SortedDictionary<string, RecipeShip> SDictionary_Craft_ShipRecipes = new SortedDictionary<string, RecipeShip>();
-        private SortedDictionary<string, RecipeModule> SDictionary_Craft_ModuleRecipes = new SortedDictionary<string, RecipeModule>();
-        private SortedDictionary<string, Recipe> SDictionary_Craft_Recipes = new SortedDictionary<string, Recipe>();
-        private SortedDictionary<int, Craft_Order> SDictionary_Craft_Order = new SortedDictionary<int, Craft_Order>();
-        private SortedDictionary<string, int> SD_Craft_Name_Amount = new SortedDictionary<string, int>();
-        private SortedDictionary<string, Ship> SD_ShipsTempates = new SortedDictionary<string, Ship>();
-        private SortedDictionary<string, Craft_Recipe> SD_Craft_Recipes_custom = new SortedDictionary<string, Craft_Recipe>();
-        private SortedDictionary<string, Craft_Recipe> SD_Craft_Recipes_custom_sorted = new SortedDictionary<string, Craft_Recipe>();
-        private Dictionary<string, List<string>> Dict_Craft_Trim_Extra = new Dictionary<string, List<string>>();
+        private List<string> List_Info_Types;
+        private List<string> List_Info_IDtoName;
+        private Dictionary<string, SortedDictionary<string, int>> Dict_sorted_by_flag_Name_amount;
+        private Storage Storage;
+        private List<Storage_LabourHours> List_Storage_LabourHours;
+        private List<Storage_Ship_Recipes> List_Storage_Ship_Recipes;
+        private SortedDictionary<int, string> SDictionary_Info_IDtoName;
+        private SortedDictionary<string, Storage_Resources> SDictionary_Storage_Resource;
+        private SortedDictionary<string, Storage_Materials> SDictionary_Storage_Materials;
+        private SortedDictionary<string, Storage_LabourHours> SDictionary_Storage_LabourHours;
+        private SortedDictionary<string, bool> SDictionary_Storage_ShipRecipes;
+        private SortedDictionary<string, RecipeShip> SDictionary_Craft_ShipRecipes;
+        private SortedDictionary<string, RecipeModule> SDictionary_Craft_ModuleRecipes;
+        private SortedDictionary<string, Recipe> SDictionary_Craft_Recipes;
+        private SortedDictionary<int, Craft_Order> SDictionary_Craft_Order;
+        private SortedDictionary<string, int> SD_Craft_Name_Amount;
+        private SortedDictionary<string, Ship> SD_ShipsTempates;
+        private SortedDictionary<string, Craft_Recipe> SD_Craft_Recipes_custom;
+        private SortedDictionary<string, Craft_Recipe> SD_Craft_Recipes_custom_sorted;
+        private Dictionary<string, List<string>> Dict_Craft_Trim_Extra;
 
         private bool mouseInPanel;
         private bool _pMove;
@@ -54,11 +54,40 @@ namespace Test_NavalAction_Tool
 
             InitializeComponent();
 
+            #region Initializing variables
+            ItemTemplates = new List<SortedDictionary<string, object>>();
+            List_Ports = new List<Port>();
+            List_Shops = new List<Shop>();
+            List_Info_Types = new List<string>();
+            List_Info_IDtoName = new List<string>();
+            Dict_sorted_by_flag_Name_amount = new Dictionary<string, SortedDictionary<string, int>>();
+            //Storage = new Storage();
+            List_Storage_LabourHours = new List<Storage_LabourHours>();
+            List_Storage_Ship_Recipes = new List<Storage_Ship_Recipes>();
+            SDictionary_Info_IDtoName = new SortedDictionary<int, string>();
+            SDictionary_Storage_Resource = new SortedDictionary<string, Storage_Resources>();
+            SDictionary_Storage_Materials = new SortedDictionary<string, Storage_Materials>();
+            SDictionary_Storage_LabourHours = new SortedDictionary<string, Storage_LabourHours>();
+            SDictionary_Storage_ShipRecipes = new SortedDictionary<string, bool>();
+            SDictionary_Craft_ShipRecipes = new SortedDictionary<string, RecipeShip>();
+            SDictionary_Craft_ModuleRecipes = new SortedDictionary<string, RecipeModule>();
+            SDictionary_Craft_Recipes = new SortedDictionary<string, Recipe>();
+            SDictionary_Craft_Order = new SortedDictionary<int, Craft_Order>();
+            SD_Craft_Name_Amount = new SortedDictionary<string, int>();
+            SD_ShipsTempates = new SortedDictionary<string, Ship>();
+            SD_Craft_Recipes_custom = new SortedDictionary<string, Craft_Recipe>();
+            SD_Craft_Recipes_custom_sorted = new SortedDictionary<string, Craft_Recipe>();
+            Dict_Craft_Trim_Extra = new Dictionary<string, List<string>>();
+            #endregion
+
             #region Deserialise functions call
-            func_json_ItemTemplates_deserialise();
+            // TODO: JsonDeserializationHandler Move logic of deserialization to named class. Remove to handlers in new folder. Research about handlers!
+            ItemTemplates = new Handlers.Serialization.JsonDeserializationHandler();
+            DeserialiseJsonItemTemplates();
             func_json_Ports_deserialise();
             func_json_Shops_deserialise();
             func_json_Nations_deserialise();
+            //Till here
             #endregion
 
             #region WIP-Is it possible to add interactive map?
@@ -104,29 +133,57 @@ namespace Test_NavalAction_Tool
 
         public void func_Recipes_in_CraftTab_populating()
         {
+            //Previous IFs are commented here
+            /*
+                          foreach(SortedDictionary<string, object> obj in ItemTemplates)
+             {
+                 //Use Switch/Case!
+
+                 if(obj["ItemType"].ToString() == "RecipeShip")
+                 {
+                     RecipeShip recipe = JsonConvert.DeserializeObject<RecipeShip>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                     SDictionary_Craft_ShipRecipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), recipe);
+                 }
+                 if(obj["ItemType"].ToString() == "RecipeModule")
+                 {
+                     RecipeModule recipe = JsonConvert.DeserializeObject<RecipeModule>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                     SDictionary_Craft_ModuleRecipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), recipe);
+                 }
+                 if(obj["ItemType"].ToString() == "Recipe")
+                 {
+                     Recipe recipe = JsonConvert.DeserializeObject<Recipe>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                     SDictionary_Craft_Recipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), recipe);
+                 }
+
+                 if(obj["ItemType"].ToString() == "Ship")
+                 {
+                     Ship ShipTemplateName = JsonConvert.DeserializeObject<Ship>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                     SD_ShipsTempates.Add(obj["Name"].ToString(), ShipTemplateName);
+                 }
+             }
+            */
             foreach(SortedDictionary<string, object> obj in ItemTemplates)
             {
-
-                if(obj["ItemType"].ToString() == "RecipeShip")
+                //Use Switch/Case!-------------DONE! You can grab your beer)
+                string strItemType = obj["ItemType"].ToString();
+                switch(strItemType) 
                 {
-                    RecipeShip recipe = JsonConvert.DeserializeObject<RecipeShip>(JsonConvert.SerializeObject(obj, Formatting.Indented));
-                    SDictionary_Craft_ShipRecipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), recipe);
-                }
-                if(obj["ItemType"].ToString() == "RecipeModule")
-                {
-                    RecipeModule recipe = JsonConvert.DeserializeObject<RecipeModule>(JsonConvert.SerializeObject(obj, Formatting.Indented));
-                    SDictionary_Craft_ModuleRecipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), recipe);
-                }
-                if(obj["ItemType"].ToString() == "Recipe")
-                {
-                    Recipe recipe = JsonConvert.DeserializeObject<Recipe>(JsonConvert.SerializeObject(obj, Formatting.Indented));
-                    SDictionary_Craft_Recipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), recipe);
-                }
-
-                if(obj["ItemType"].ToString() == "Ship")
-                {
-                    Ship ShipTemplateName = JsonConvert.DeserializeObject<Ship>(JsonConvert.SerializeObject(obj, Formatting.Indented));
-                    SD_ShipsTempates.Add(obj["Name"].ToString(), ShipTemplateName);
+                case ("RecipeShip"):
+                    RecipeShip RecipeShip = JsonConvert.DeserializeObject<RecipeShip>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                    SDictionary_Craft_ShipRecipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), RecipeShip);
+                    break;
+                case ("RecipeModule"):
+                    RecipeModule RecipeModule = JsonConvert.DeserializeObject<RecipeModule>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                    SDictionary_Craft_ModuleRecipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), RecipeModule);
+                break;
+                    case ("Ship"):
+                    Ship Ship = JsonConvert.DeserializeObject<Ship>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                    SD_ShipsTempates.Add(obj["Name"].ToString(), Ship);
+                break;
+                    case("Recipe"):
+                    Recipe Recipe = JsonConvert.DeserializeObject<Recipe>(JsonConvert.SerializeObject(obj, Formatting.Indented));
+                    SDictionary_Craft_Recipes.Add(obj["Name"].ToString().Remove(obj["Name"].ToString().IndexOf(" Blueprint")), Recipe);
+                break;
                 }
             }
         }
@@ -188,17 +245,15 @@ namespace Test_NavalAction_Tool
             }
         }
         
-        public void func_json_ItemTemplates_deserialise()
+        public void DeserialiseJsonItemTemplates()
         {
+            //Create new project with logic of internet requests
             string text = new StreamReader(((HttpWebResponse)((HttpWebRequest)WebRequest.Create("http://storage.googleapis.com/nacleanopenworldprodshards/ItemTemplates_cleanopenworldprodeu1.json")).GetResponse()).GetResponseStream(), Encoding.UTF8).ReadToEnd();
-
             text = text.Remove(text.Length - 1);
             string text_remove = "var ItemTemplates = ";
             text = text.Remove(0, text_remove.Length);
             string file_path = "Item_Templates.json";
-
             File.WriteAllText(file_path, text);
-
             ItemTemplates = JsonConvert.DeserializeObject<List<SortedDictionary<string, object>>>(text);
         }
         
@@ -316,9 +371,9 @@ namespace Test_NavalAction_Tool
 
         private Storage func_Storage_population()
         {
-            Storage storage = new Storage();
-            int num = 0;
-            int num2 = 0;
+            Storage Storage = new Storage();
+            int i_res = 0;
+            int i_mat = 0;
             foreach (SortedDictionary<string, object> current in ItemTemplates)
             {
                 if (current["ItemType"].ToString() == "Resource")
@@ -333,7 +388,7 @@ namespace Test_NavalAction_Tool
                     storage_Resources.Id = Convert.ToInt32(current["Id"].ToString());
                     storage_Resources.ProducedByNation = Convert.ToInt32(current["ProducedByNation"].ToString());
                     SDictionary_Storage_Resource.Add(storage_Resources.Name, storage_Resources);
-                    num++;
+                    i_res++;
                 }
                 if (current["ItemType"].ToString() == "Material")
                 {
@@ -345,7 +400,7 @@ namespace Test_NavalAction_Tool
                     storage_Materials.ItemWeight = Convert.ToDouble(current["ItemWeight"].ToString());
                     storage_Materials.Id = Convert.ToInt32(current["Id"].ToString());
                     SDictionary_Storage_Materials.Add(storage_Materials.Name, storage_Materials);
-                    num2++;
+                    i_mat++;
                 }
                 if (current["ItemType"].ToString() == "RecipeShip")
                 {
@@ -380,11 +435,11 @@ namespace Test_NavalAction_Tool
                 List_Storage_Ship_Recipes.Add(storage_Ship_Recipes);
             }
             SDictionary_Storage_Resource.Values.ToArray<Storage_Resources>();
-            storage.Storage_Resources = SDictionary_Storage_Resource.Values.ToArray<Storage_Resources>();
-            storage.Storage_Materials = SDictionary_Storage_Materials.Values.ToArray<Storage_Materials>();
-            storage.Storage_LabourHours = List_Storage_LabourHours.ToArray();
-            storage.Storage_Ship_Recipes = List_Storage_Ship_Recipes.ToArray();
-            Storage = storage;
+            Storage.Storage_Resources = SDictionary_Storage_Resource.Values.ToArray<Storage_Resources>();
+            Storage.Storage_Materials = SDictionary_Storage_Materials.Values.ToArray<Storage_Materials>();
+            Storage.Storage_LabourHours = List_Storage_LabourHours.ToArray();
+            Storage.Storage_Ship_Recipes = List_Storage_Ship_Recipes.ToArray();
+            Storage = Storage;
             return Storage;
         }
 
@@ -1910,8 +1965,9 @@ namespace Test_NavalAction_Tool
             return result;
         }
 
-        private void comboBox_Craft_NewOrder_Quality_SelectedIndexChanged(object sender, EventArgs e)
+        private void CraftNewOrderQualitySelectedIndexChanged(object sender, EventArgs e)
         {
+            //TODO: Rewrite all used ifs to switch/case
             if (comboBox_Craft_NewOrder_Quality.SelectedIndex == 0)
             {
                 comboBox_Craft_NewOrder_Quality.BackColor = Color.LightGray;

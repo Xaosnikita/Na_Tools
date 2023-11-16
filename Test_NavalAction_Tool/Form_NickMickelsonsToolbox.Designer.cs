@@ -363,7 +363,7 @@ namespace Test_NavalAction_Tool
             this.tabControl_NA_Tool.Location = new System.Drawing.Point(3, 12);
             this.tabControl_NA_Tool.Name = "tabControl_NA_Tool";
             this.tabControl_NA_Tool.SelectedIndex = 0;
-            this.tabControl_NA_Tool.Size = new System.Drawing.Size(840, 863);
+            this.tabControl_NA_Tool.Size = new System.Drawing.Size(1073, 863);
             this.tabControl_NA_Tool.TabIndex = 8;
             // 
             // tabPage_Info
@@ -442,7 +442,7 @@ namespace Test_NavalAction_Tool
             this.tabPage_Storage.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Storage.Name = "tabPage_Storage";
             this.tabPage_Storage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Storage.Size = new System.Drawing.Size(832, 837);
+            this.tabPage_Storage.Size = new System.Drawing.Size(1065, 837);
             this.tabPage_Storage.TabIndex = 1;
             this.tabPage_Storage.Text = "Storage_WIP";
             this.tabPage_Storage.UseVisualStyleBackColor = true;
@@ -883,7 +883,7 @@ namespace Test_NavalAction_Tool
             this.comboBox_Craft_NewOrder_Quality.Name = "comboBox_Craft_NewOrder_Quality";
             this.comboBox_Craft_NewOrder_Quality.Size = new System.Drawing.Size(159, 21);
             this.comboBox_Craft_NewOrder_Quality.TabIndex = 13;
-            this.comboBox_Craft_NewOrder_Quality.SelectedIndexChanged += new System.EventHandler(this.comboBox_Craft_NewOrder_Quality_SelectedIndexChanged);
+            this.comboBox_Craft_NewOrder_Quality.SelectedIndexChanged += new System.EventHandler(this.CraftNewOrderQualitySelectedIndexChanged);
             // 
             // radioButton_Craft_Module
             // 
@@ -1251,7 +1251,7 @@ namespace Test_NavalAction_Tool
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(864, 887);
+            this.ClientSize = new System.Drawing.Size(1097, 887);
             this.Controls.Add(this.tabControl_NA_Tool);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form_NickMickelsonsToolbox";
